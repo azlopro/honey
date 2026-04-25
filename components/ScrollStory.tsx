@@ -366,8 +366,8 @@ export default function ScrollStory() {
   const chapters = [
     {
       number: '01 / Origin',
-      title: 'Born in ancient meadows.',
-      body: 'Our single-origin honey travels from remote wildflower fields untouched by pesticides or industry. Every jar carries the living memory of a landscape.',
+      title: 'Born on the wild coast.',
+      body: 'Our single-origin honey is harvested from wild coastal landscapes along the Danish shoreline — untouched by pesticides, far from industry. Every jar carries the living character of the North Sea coast.',
       side: 'left' as const,
       visual: <FlowerVisual />,
     },
@@ -448,7 +448,7 @@ export default function ScrollStory() {
 
         {/* Stats bar */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4"
+          className="grid grid-cols-3"
           style={{
             gap: 'clamp(24px, 4vw, 48px)',
             padding: 'clamp(40px, 6vw, 80px) 0',
@@ -461,10 +461,9 @@ export default function ScrollStory() {
           transition={{ duration: 0.8 }}
         >
           {[
-            { value: '500+', label: 'Hive colonies' },
             { value: '12°C', label: 'Cold extraction' },
             { value: '0', label: 'Additives' },
-            { value: '2024', label: 'Harvest batch' },
+            { value: '2026', label: 'Harvest batch' },
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <p className="font-serif mb-2" style={{ fontSize: 'clamp(28px, 4vw, 48px)', color: 'var(--honey-gold)' }}>{stat.value}</p>

@@ -84,7 +84,7 @@ export default function CTASection() {
           >
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--honey-gold)', flexShrink: 0 }} />
             <span className="uppercase" style={{ color: 'var(--gold-70)', fontSize: 'clamp(9px, 0.9vw, 11px)', letterSpacing: '0.4em' }}>
-              47 jars remaining from Batch 2024
+              Limited harvest · Batch 2026
             </span>
           </motion.div>
 
@@ -109,8 +109,8 @@ export default function CTASection() {
             viewport={{ once: true }}
             transition={{ delay: 0.25, duration: 0.8 }}
           >
-            Each harvest is finite. When the 2024 batch sells out, the next won&apos;t be ready until autumn 2025.
-            Join the collectors who reserve early.
+            Each harvest is finite. When the 2026 batch sells out, the next won&apos;t arrive until the following season.
+            Reserve yours now.
           </motion.p>
 
           {/* CTA buttons */}
@@ -190,7 +190,7 @@ export default function CTASection() {
             {[
               { icon: '🔒', label: 'Secure payment' },
               { icon: '🚚', label: 'Free shipping' },
-              { icon: '↩', label: '30-day returns' },
+              { icon: '✦', label: 'Sealed & intact' },
               { icon: '✦', label: 'Gift-wrapped' },
             ].map(item => (
               <div key={item.label} className="flex items-center gap-2">

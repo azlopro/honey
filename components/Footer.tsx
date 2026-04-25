@@ -32,7 +32,7 @@ export default function Footer() {
               </p>
             </div>
             <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', lineHeight: 1.7, maxWidth: '32ch', color: 'var(--cream-35)', fontWeight: 300 }}>
-              Liquid gold from ancient wildflower meadows. Single-origin. Raw. Uncompromising.
+              Liquid gold from wild coastal Denmark. Single-origin. Raw. Uncompromising.
             </p>
             {/* Social */}
             <div className="flex gap-5">
@@ -120,7 +120,7 @@ export default function Footer() {
           style={{ gap: 'clamp(12px, 1.5vw, 16px)', paddingTop: 'clamp(24px, 3vw, 40px)' }}
         >
           <p style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-20)', fontWeight: 300 }}>
-            © 2024 Aurum Honey Ltd. All rights reserved.
+            © 2026 Aurum Honey Ltd. All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms', 'Cookies'].map(link => (

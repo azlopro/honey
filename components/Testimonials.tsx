@@ -240,26 +240,6 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      {/* Press mentions */}
-      <motion.div
-        className="text-center"
-        style={{ borderTop: '1px solid var(--gold-08)', marginTop: 'clamp(48px, 6vw, 96px)', paddingTop: 'clamp(32px, 4vw, 56px)' }}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <p className="uppercase" style={{ fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.5em', color: 'var(--gold-30)', marginBottom: 'clamp(20px, 3vw, 40px)' }}>
-          As featured in
-        </p>
-        <div className="flex flex-wrap items-center justify-center" style={{ gap: 'clamp(20px, 4vw, 64px)' }}>
-          {['Condé Nast', 'The Times', 'Wallpaper*', 'Monocle', 'Bon Appétit'].map(pub => (
-            <span key={pub} className="font-cormorant italic" style={{ fontSize: 'clamp(16px, 2vw, 22px)', color: 'var(--cream-20)' }}>
-              {pub}
-            </span>
-          ))}
-        </div>
-      </motion.div>
       </div>
     </section>
   )

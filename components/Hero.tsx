@@ -315,7 +315,7 @@ export default function Hero() {
           className="uppercase"
           style={{ color: 'var(--gold-40)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: '8px', letterSpacing: '0.4em' }}
         >
-          Batch 2024 — Wildflower
+          Batch 2026 — Wild Coastal
         </span>
       </motion.div>
 

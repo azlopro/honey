@@ -110,7 +110,7 @@ function ProductCard() {
                 <line x1="82" y1="246" x2="198" y2="246" stroke="rgba(212,168,67,0.25)" strokeWidth="0.5" />
                 <text x="140" y="260" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7.5" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
                 <text x="140" y="278" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6.5" letterSpacing="2.5" fill="rgba(212,168,67,0.32)">SINGLE ORIGIN · WILDFLOWER</text>
-                <text x="140" y="294" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.22)">500g · Batch 2024</text>
+                <text x="140" y="294" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.22)">500g · Batch 2026</text>
                 <path d="M150 82 Q150 96 146 106 Q143 113 146 118 Q149 113 151 106 Q153 96 154 82" fill="#D4A843" opacity="0.65" />
                 <ellipse cx="146" cy="120" rx="5" ry="6.5" fill="#D4A843" opacity="0.6" />
               </svg>
@@ -119,7 +119,7 @@ function ProductCard() {
 
           {/* Product info */}
           <div className="text-center" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.5em' }}>Limited Batch · 2024</p>
+            <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.5em' }}>Limited Batch · 2026</p>
             <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 2vw, 24px)', color: 'var(--cream)' }}>Wildflower Raw Honey</h3>
             <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>500g · Cold-extracted</p>
           </div>
@@ -169,7 +169,7 @@ export default function ProductSection() {
     {
       icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>),
       title: 'Single-origin terroir',
-      desc: 'Sourced exclusively from a single wildflower meadow above 1200m — no blending, no compromise.',
+      desc: 'Sourced exclusively from wild coastal apiaries along the Danish shoreline — no blending, no compromise.',
     },
     {
       icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>),
@@ -310,7 +310,7 @@ export default function ProductSection() {
             </motion.a>
 
             <p className="text-center" style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-25)' }}>
-              Only 47 jars remaining from the 2024 batch
+              Limited harvest — quantities are not replenished mid-season.
             </p>
           </motion.div>
         </div>
