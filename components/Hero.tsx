@@ -196,7 +196,7 @@ export default function Hero() {
             width: `${200 + i * 140}px`,
             height: `${200 + i * 140}px`,
             borderColor: `rgba(212,168,67,${0.06 - i * 0.015})`,
-            animation: `ringPulse ${4 + i * 2}s ease-out ${i * 1.5}s infinite`,
+            animation: `ringPulse ${4 + i * 2}s linear ${i * 1.5}s infinite`,
           }}
         />
       ))}

@@ -186,8 +186,9 @@ body {
 
 /* Honey jar glow rings */
 @keyframes ringPulse {
-  0% { transform: scale(0.8); opacity: 0.6; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0%   { transform: scale(0.85); opacity: 0; }
+  12%  { opacity: 0.5; }
+  100% { transform: scale(1.9); opacity: 0; }
 }
 
 /* Lenis smooth scroll */
