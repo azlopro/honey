@@ -166,18 +166,23 @@ function HoneycombVisual() {
           </linearGradient>
         </defs>
         {hexes.map((h, i) => (
-          <motion.polygon
+          <motion.g
             key={i}
-            points={hexPoints(h.x, h.y, 28)}
-            fill={h.filled ? 'url(#hexFill)' : 'none'}
-            stroke="rgba(212,168,67,0.25)"
-            strokeWidth="1"
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: h.delay + i * 0.03, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             style={{ transformOrigin: `${h.x}px ${h.y}px` }}
-          />
+          >
+            <motion.polygon
+              points={hexPoints(h.x, h.y, 28)}
+              fill={h.filled ? 'url(#hexFill)' : 'none'}
+              stroke="rgba(212,168,67,0.25)"
+              strokeWidth="1"
+              animate={h.filled ? { opacity: [1, 0.6, 1] } : undefined}
+              transition={h.filled ? { duration: 3 + (i % 3), repeat: Infinity, ease: 'easeInOut', delay: (i % 2) } : undefined}
+            />
+          </motion.g>
         ))}
       </svg>
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, var(--charcoal-70) 100%)' }} />
@@ -207,8 +212,26 @@ function FlowerVisual() {
           </radialGradient>
         </defs>
         <rect width="400" height="300" fill="url(#flowerGlow)" />
-        <circle cx="320" cy="60" r="40" fill="rgba(240,200,122,0.12)" />
-        <circle cx="320" cy="60" r="24" fill="rgba(240,200,122,0.2)" />
+        <motion.g
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          style={{ transformOrigin: '320px 60px' }}
+        >
+          <motion.circle
+            cx="320" cy="60" r="40" fill="rgba(240,200,122,0.12)"
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ transformOrigin: '320px 60px' }}
+          />
+          <motion.circle
+            cx="320" cy="60" r="24" fill="rgba(240,200,122,0.2)"
+            animate={{ scale: [1, 1.08, 1] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            style={{ transformOrigin: '320px 60px' }}
+          />
+        </motion.g>
         {[60, 110, 160, 210, 260, 310, 360].map((x, i) => (
           <g key={x}>
             <motion.line x1={x} y1={300} x2={x + (i % 2 === 0 ? -10 : 10)} y2={180 + (i % 3) * 20} stroke="rgba(107,66,38,0.5)" strokeWidth="2"
@@ -265,16 +288,52 @@ function DripVisual() {
           fill="none" stroke="url(#dripGrad)" strokeWidth="12" strokeLinecap="round"
           initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
           transition={{ duration: 1.5, ease: 'easeInOut' }} filter="url(#dripGlow)" />
+          
+        {/* Continuously flowing internal streaks to simulate thick liquid movement */}
+        {[0, 1, 2].map((i) => (
+          <motion.ellipse key={`flowstreak-${i}`}
+            cx={160 + (i === 1 ? -1.5 : i === 2 ? 1.5 : 0)} cy={0} rx={1.5} ry={12} fill="rgba(255, 230, 150, 0.5)"
+            initial={{ opacity: 0, cy: 0 }}
+            animate={{ cy: [0, 110, 215], opacity: [0, 0.8, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: i * 1.5 + 1.5 }}
+            filter="url(#dripGlow)"
+          />
+        ))}
+        
         {[{ cx: 157, cy: 195, r: 10 }, { cx: 153, cy: 205, r: 7 }, { cx: 160, cy: 213, r: 12 }].map((d, i) => (
           <motion.ellipse key={i} cx={d.cx} cy={d.cy} rx={d.r} ry={d.r * 1.3} fill="url(#dripGrad)"
-            initial={{ opacity: 0, scaleY: 0 }} whileInView={{ opacity: 1, scaleY: 1 }} viewport={{ once: true }}
-            transition={{ delay: 1.2 + i * 0.15, duration: 0.4 }} style={{ transformOrigin: `${d.cx}px ${d.cy}px` }} />
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            animate={{ y: [0, i % 2 === 0 ? 3 : -2, 0], scaleX: [1, 1.15, 1], scaleY: [1, 0.9, 1] }}
+            transition={{
+              opacity: { delay: 1.2 + i * 0.15, duration: 0.4 },
+              scale: { delay: 1.2 + i * 0.15, duration: 0.4 },
+              y: { delay: 1.5 + i * 0.2, duration: 2 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+              scaleX: { delay: 1.5 + i * 0.2, duration: 2 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+              scaleY: { delay: 1.5 + i * 0.2, duration: 2 + i * 0.5, repeat: Infinity, ease: "easeInOut" }
+            }}
+            style={{ transformOrigin: `${d.cx}px ${d.cy}px` }}
+          />
         ))}
         {[80, 240].map((x, i) => (
-          <motion.path key={x} d={`M${x} 30 Q${x - 5} 80 ${x + 3} 130 Q${x + 5} 155 ${x} 170`}
+          <motion.path key={x}
             fill="none" stroke="rgba(212,168,67,0.3)" strokeWidth="5" strokeLinecap="round"
-            initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
-            transition={{ delay: 0.3 + i * 0.2, duration: 1.2 }} />
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            animate={{
+              d: [
+                `M${x} 30 Q${x - 5} 80 ${x + 3} 130 Q${x + 5} 155 ${x} 170`,
+                `M${x} 30 Q${x + 4} 70 ${x - 2} 125 Q${x - 4} 160 ${x} 170`,
+                `M${x} 30 Q${x - 5} 80 ${x + 3} 130 Q${x + 5} 155 ${x} 170`
+              ]
+            }}
+            transition={{
+              pathLength: { delay: 0.3 + i * 0.2, duration: 1.2 },
+              d: { delay: 0.3 + i * 0.2, duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut" }
+            }}
+          />
         ))}
         <motion.ellipse cx="160" cy="213" rx="60" ry="10" fill="rgba(240,200,122,0.2)"
           animate={{ rx: [60, 70, 60], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 2, repeat: Infinity }} />
