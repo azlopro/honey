@@ -1,8 +1,72 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import gsap from 'gsap'
+
+/* ── Crossfading video background ─────────────────────────────────── */
+const HERO_VIDEOS = ['/videos/thy1.mp4', '/videos/thy2.mp4', '/videos/thy3.mp4']
+
+function HeroVideo() {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const refs = useRef<(HTMLVideoElement | null)[]>([])
+  const pauseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    // Cancel any pending pause from a previous cleanup (handles React Strict Mode double-invoke)
+    if (pauseTimer.current) { clearTimeout(pauseTimer.current); pauseTimer.current = null }
+
+    const vid = refs.current[activeIdx]
+    if (!vid) return
+    // Only reset to start if the video has already played through
+    if (vid.ended) vid.currentTime = 0
+    vid.play().catch(() => {})
+
+    const onTimeUpdate = () => {
+      if (!vid.duration) return
+      if (vid.duration - vid.currentTime < 1.5) {
+        const next = (activeIdx + 1) % HERO_VIDEOS.length
+        refs.current[next]?.play().catch(() => {})
+      }
+    }
+    const onEnded = () => setActiveIdx(prev => (prev + 1) % HERO_VIDEOS.length)
+
+    vid.addEventListener('timeupdate', onTimeUpdate)
+    vid.addEventListener('ended', onEnded)
+
+    return () => {
+      vid.removeEventListener('timeupdate', onTimeUpdate)
+      vid.removeEventListener('ended', onEnded)
+      const v = vid
+      pauseTimer.current = setTimeout(() => { v.pause(); pauseTimer.current = null }, 1500)
+    }
+  }, [activeIdx])
+
+  return (
+    <>
+      {HERO_VIDEOS.map((src, i) => (
+        <video
+          key={src}
+          ref={el => { refs.current[i] = el }}
+          muted
+          playsInline
+          // Only eagerly fetch the first video; others load on-demand when play() is called
+          preload={i === 0 ? 'auto' : 'none'}
+          poster={i === 0 ? '/images/hero-poster.jpg' : undefined}
+          className="absolute inset-0 w-full h-full"
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+            opacity: i === activeIdx ? 1 : 0,
+            transition: 'opacity 1.2s ease',
+          }}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      ))}
+    </>
+  )
+}
 
 /* ── Honey Jar SVG ────────────────────────────────────────────────── */
 function HoneyJar() {
@@ -92,7 +156,7 @@ function HoneyJar() {
       <line x1="85" y1="240" x2="195" y2="240" stroke="rgba(212,168,67,0.3)" strokeWidth="0.5" />
       <text x="140" y="254" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
       <text x="140" y="272" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.35)" letterSpacing="2">SINGLE ORIGIN</text>
-      <text x="140" y="285" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.25)">500g</text>
+      <text x="140" y="285" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.25)">350g</text>
 
       <path d="M148 86 Q148 100 144 108 Q141 114 144 120 Q147 114 148 108 Q150 100 152 86" fill="#D4A843" opacity="0.7" />
       <ellipse cx="144" cy="122" rx="5" ry="6" fill="#D4A843" opacity="0.6" />
@@ -184,9 +248,14 @@ export default function Hero() {
       style={{
         height: '100svh',
         minHeight: 600,
-        background: 'radial-gradient(ellipse 80% 80% at 50% 0%, var(--charcoal-mid) 0%, var(--charcoal) 60%, var(--bg-deep) 100%)',
+        background: 'var(--bg-deep)',
       }}
     >
+      {/* Crossfading video background */}
+      <HeroVideo />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(6,4,2,0.62) 0%, rgba(6,4,2,0.38) 40%, rgba(6,4,2,0.72) 100%)' }} />
+
       {/* Ambient glow rings */}
       {[1, 2, 3].map(i => (
         <div
@@ -218,52 +287,25 @@ export default function Hero() {
 
       <Particles />
 
-      {/* Layer 1 — CSS position centering only. No transform. GSAP never touches this. */}
+      {/* Jar + headline as one centered column — no guesswork on offsets */}
       <div
-        ref={containerRef}
-        className="absolute"
-        style={{
-          left: '50%',
-          top: '50%',
-          width: 'clamp(160px, 26vw, 280px)',
-          height: 'clamp(220px, 35vw, 380px)',
-          marginLeft: 'calc(-1 * clamp(80px, 13vw, 140px))',
-          marginTop: 'clamp(-220px, -22vw, -160px)',
-          zIndex: 2,
-        }}
+        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+        style={{ zIndex: 2, paddingTop: '15px' }}
       >
-        {/* Layer 2 — CSS float animation. Lives in its own transform context. */}
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            animation: 'float 7s ease-in-out infinite',
-          }}
-        >
-          {/* Layer 3 — GSAP mouse parallax only. Safe to transform freely. */}
-          <div
-            ref={jarRef}
-            style={{
-              width: '100%',
-              height: '100%',
-              transformStyle: 'preserve-3d',
-              perspective: 800,
-            }}
-          >
-            <HoneyJar />
+        {/* Jar — 3-layer stack preserved (float + GSAP parallax) */}
+        <div style={{ width: 'clamp(160px, 26vw, 280px)', height: 'clamp(220px, 35vw, 380px)', flexShrink: 0 }}>
+          <div style={{ width: '100%', height: '100%', animation: 'float 7s ease-in-out infinite' }}>
+            <div
+              ref={jarRef}
+              style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d', perspective: 800 }}
+            >
+              <HoneyJar />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Headline — centered below jar */}
-      <div
-        className="absolute left-0 right-0 bottom-0 flex flex-col items-center pointer-events-none"
-        style={{
-          paddingBottom: 'clamp(60px, 10vh, 120px)',
-          zIndex: 3,
-        }}
-      >
-        <div className="text-center" style={{ padding: '0 clamp(16px, 5vw, 60px)' }}>
+        {/* Headline — sits naturally below jar with a fixed gap */}
+        <div className="text-center" style={{ padding: '0 clamp(16px, 5vw, 60px)', marginTop: 'clamp(8px, 1.5vh, 20px)' }}>
           {headline.map((word, i) => (
             <motion.div
               key={word}
@@ -331,7 +373,7 @@ export default function Hero() {
           className="uppercase"
           style={{ color: 'var(--gold-40)', writingMode: 'vertical-rl', fontSize: '8px', letterSpacing: '0.4em' }}
         >
-          500g · £48
+          350g · €38
         </span>
         <div className="h-14 w-px" style={{ background: 'linear-gradient(to top, transparent, var(--gold-40))' }} />
       </motion.div>

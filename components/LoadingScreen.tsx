@@ -41,7 +41,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
           }}
         >
           {/* Honey drip container */}
-          <div className="relative flex flex-col items-center">
+          <div className="relative flex flex-col items-center" style={{ paddingTop: 32, paddingBottom: 32 }}>
             {/* Drip track */}
             <div className="relative" style={{ width: 2, height: 80 }}>
               <motion.div
@@ -55,8 +55,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
                   borderRadius: ['0 0 4px 4px', '0 0 8px 8px', '0 0 12px 12px', '0 0 8px 8px'],
                 }}
                 transition={{
-                  duration: 2,
-                  repeat: Infinity,
+                  duration: 2.8,
                   ease: 'easeInOut',
                 }}
               />
@@ -70,13 +69,13 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
                   borderRadius: '50% 50% 70% 70% / 40% 40% 60% 60%',
                 }}
                 animate={{
-                  top: [56, 64, 72, 56],
-                  opacity: [1, 1, 0, 0],
-                  scaleX: [1, 1.2, 0.8, 0],
+                  top: [60, 64, 66, 68],
+                  opacity: [0, 1, 1, 0],
+                  scaleY: [0.6, 1, 1.2, 0.4],
                 }}
                 transition={{
-                  duration: 2,
-                  repeat: Infinity,
+                  duration: 3.2,
+                  times: [0, 0.3, 0.85, 1],
                   ease: 'easeInOut',
                 }}
               />
@@ -105,8 +104,8 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
 
             {/* Progress bar */}
             <div
-              className="mt-10 overflow-hidden"
-              style={{ width: 120, height: 1, background: 'var(--gold-15)' }}
+              className="overflow-hidden"
+              style={{ width: 120, height: 1, background: 'var(--gold-15)', marginTop: 20 }}
             >
               <motion.div
                 className="h-full"

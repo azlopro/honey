@@ -110,7 +110,7 @@ function ProductCard() {
                 <line x1="82" y1="246" x2="198" y2="246" stroke="rgba(212,168,67,0.25)" strokeWidth="0.5" />
                 <text x="140" y="260" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7.5" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
                 <text x="140" y="278" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6.5" letterSpacing="2.5" fill="rgba(212,168,67,0.32)">SINGLE ORIGIN · WILDFLOWER</text>
-                <text x="140" y="294" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.22)">500g · Batch 2026</text>
+                <text x="140" y="294" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.22)">350g · Batch 2026</text>
                 <path d="M150 82 Q150 96 146 106 Q143 113 146 118 Q149 113 151 106 Q153 96 154 82" fill="#D4A843" opacity="0.65" />
                 <ellipse cx="146" cy="120" rx="5" ry="6.5" fill="#D4A843" opacity="0.6" />
               </svg>
@@ -121,7 +121,7 @@ function ProductCard() {
           <div className="text-center" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.5em' }}>Limited Batch · 2026</p>
             <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 2vw, 24px)', color: 'var(--cream)' }}>Wildflower Raw Honey</h3>
-            <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>500g · Cold-extracted</p>
+            <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>350g · Cold-extracted</p>
           </div>
         </div>
       </motion.div>
@@ -244,9 +244,9 @@ export default function ProductSection() {
           >
             <div>
               <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.4em', marginBottom: 8 }}>
-                Single Jar · 500g
+                Single Jar · 350g
               </p>
-              <p className="font-serif" style={{ fontSize: 'clamp(36px, 5vw, 56px)', color: 'var(--cream)' }}>£48</p>
+              <p className="font-serif" style={{ fontSize: 'clamp(36px, 5vw, 56px)', color: 'var(--cream)' }}>€38</p>
               <p style={{ fontSize: 'clamp(11px, 0.9vw, 13px)', marginTop: 4, color: 'var(--cream-35)' }}>
                 Free shipping · Ships in 2–3 days
               </p>
@@ -290,7 +290,7 @@ export default function ProductSection() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
             >
-              <span className="relative z-10">Add to Cart · £{(48 * quantity).toLocaleString()}</span>
+              <span className="relative z-10">Add to Cart · €{(38 * quantity).toLocaleString()}</span>
               <motion.div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, var(--honey-light) 0%, var(--honey-gold) 100%)', opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
             </motion.a>
 

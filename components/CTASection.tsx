@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -42,6 +43,17 @@ export default function CTASection() {
         overflow: 'hidden',
       }}
     >
+      {/* Background photo — northern lights */}
+      <Image
+        src="/images/northeren-lights-thy.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center 30%', opacity: 0.35 }}
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(4,3,2,0.6) 0%, rgba(4,3,2,0.4) 50%, rgba(4,3,2,0.7) 100%)' }} />
+
       {/* Animated glow blob */}
       <div
         className="cta-glow absolute top-1/2 left-1/2 pointer-events-none"
@@ -53,19 +65,6 @@ export default function CTASection() {
           borderRadius: '50%',
           background: 'radial-gradient(ellipse, var(--gold-20) 0%, rgba(184,134,11,0.08) 50%, transparent 75%)',
           filter: 'blur(60px)',
-        }}
-      />
-
-      {/* Grid lines */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(212,168,67,0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(212,168,67,0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
         }}
       />
 
@@ -148,7 +147,7 @@ export default function CTASection() {
                 whileHover={{ x: '100%' }}
                 transition={{ duration: 0.5 }}
               />
-              <span className="relative z-10">Order Now — £48</span>
+              <span className="relative z-10">Order Now — €38</span>
               <motion.svg
                 className="relative z-10 w-4 h-4 shrink-0"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -131,6 +132,31 @@ function Chapter({ number, title, body, side, visual }: {
   )
 }
 
+/* ── Photo panel helper ───────────────────────────────────────────── */
+function PhotoVisual({ src, alt, label, position = 'center' }: { src: string; alt: string; label: string; position?: string }) {
+  return (
+    <div
+      className="relative rounded overflow-hidden"
+      style={{ aspectRatio: '4/3', border: '1px solid var(--gold-08)' }}
+    >
+      <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover', objectPosition: position }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(6,4,2,0.75) 0%, transparent 55%)' }} />
+      <div className="absolute bottom-0 inset-x-0 pb-4 text-center">
+        <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.25em' }}>{label}</p>
+      </div>
+    </div>
+  )
+}
+
+/* ── Photo visuals (6 images — use freely) ────────────────────────── */
+// Currently used: CoastalPhotoVisual (ch01), ThyLandscapeVisual (ch03)
+export function CoastalPhotoVisual()     { return <PhotoVisual src="/images/daytime-picture-of-the-beach-ocean.jpg"               alt="Wild coastal beach, Thy, Denmark"            label="Wild coastal Denmark"    position="center 60%" /> }
+export function ThyLandscapeVisual()     { return <PhotoVisual src="/images/nature-of-thy.jpg"                                      alt="Heathland and lake, Thy National Park"       label="Thy National Park"       position="center 40%" /> }
+export function MoonVisual()             { return <PhotoVisual src="/images/big-orange-moon-over-trees-and-house-and-windmills.jpg" alt="Full orange moon rising over Danish farmland" label="Danish countryside"      position="center 60%" /> }
+export function NorthernLightsVisual()   { return <PhotoVisual src="/images/northeren-lights-thy.jpg"                               alt="Northern lights over a fishing boat, Thy"     label="Northern lights, Thy"    position="center 40%" /> }
+export function SealVisual()             { return <PhotoVisual src="/images/Smiling-seal.jpg"                                       alt="Harbour seal on the rocks, Danish coast"      label="Wild coastal life"       position="center 30%" /> }
+export function SunsetMeadowVisual()     { return <PhotoVisual src="/images/very-nice-sunset-in-the-meadows.jpg"                    alt="Golden sunset over coastal wetlands, Thy"     label="Coastal wetlands, Thy"   position="center 50%" /> }
+
 /* ── Hex cell visual ──────────────────────────────────────────────── */
 function HoneycombVisual() {
   const hexes = [
@@ -220,16 +246,14 @@ function FlowerVisual() {
           style={{ transformOrigin: '320px 60px' }}
         >
           <motion.circle
-            cx="320" cy="60" r="40" fill="rgba(240,200,122,0.12)"
-            animate={{ scale: [1, 1.15, 1] }}
+            cx="320" cy="60" fill="rgba(240,200,122,0.12)"
+            animate={{ r: [40, 46, 40] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ transformOrigin: '320px 60px' }}
           />
           <motion.circle
-            cx="320" cy="60" r="24" fill="rgba(240,200,122,0.2)"
-            animate={{ scale: [1, 1.08, 1] }}
+            cx="320" cy="60" fill="rgba(240,200,122,0.2)"
+            animate={{ r: [24, 26, 24] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            style={{ transformOrigin: '320px 60px' }}
           />
         </motion.g>
         {[60, 110, 160, 210, 260, 310, 360].map((x, i) => (
@@ -336,7 +360,9 @@ function DripVisual() {
           />
         ))}
         <motion.ellipse cx="160" cy="213" rx="60" ry="10" fill="rgba(240,200,122,0.2)"
-          animate={{ rx: [60, 70, 60], opacity: [0.2, 0.4, 0.2] }} transition={{ duration: 2, repeat: Infinity }} />
+          animate={{ scaleX: [1, 1.17, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          style={{ transformBox: 'fill-box', transformOrigin: 'center' }} />
       </svg>
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, var(--gold-10) 0%, transparent 70%)' }} />
       <div className="absolute bottom-0 inset-x-0 pb-4 text-center">
@@ -369,7 +395,7 @@ export default function ScrollStory() {
       title: 'Born on the wild coast.',
       body: 'Our single-origin honey is harvested from wild coastal landscapes along the Danish shoreline — untouched by pesticides, far from industry. Every jar carries the living character of the North Sea coast.',
       side: 'left' as const,
-      visual: <FlowerVisual />,
+      visual: <SunsetMeadowVisual />,
     },
     {
       number: '02 / Craft',
@@ -461,7 +487,7 @@ export default function ScrollStory() {
           transition={{ duration: 0.8 }}
         >
           {[
-            { value: '12°C', label: 'Cold extraction' },
+            { value: '100%', label: 'Pure honey' },
             { value: '0', label: 'Additives' },
             { value: '2026', label: 'Harvest batch' },
           ].map(stat => (
