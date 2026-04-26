@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import LanguageSwitcher from './LanguageSwitcher'
+import type { NavDict } from '@/types/dict'
 
-const navLinks = ['Story', 'Craft', 'Product', 'Reviews']
-
-export default function Navigation() {
+export default function Navigation({ dict, lang }: { dict: NavDict; lang: string }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const lastScroll = useRef(0)
@@ -22,9 +22,16 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const navLinks = [
+    { label: dict.story, id: 'story' },
+    { label: dict.craft, id: 'craft' },
+    { label: dict.product, id: 'product' },
+    { label: dict.reviews, id: 'reviews' },
+  ]
+
   const scrollTo = (id: string) => {
     setMenuOpen(false)
-    const el = document.getElementById(id.toLowerCase())
+    const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -68,8 +75,8 @@ export default function Navigation() {
         <nav className="hidden md:flex items-center gap-8 lg:gap-12">
           {navLinks.map((link, i) => (
             <motion.button
-              key={link}
-              onClick={() => scrollTo(link)}
+              key={link.id}
+              onClick={() => scrollTo(link.id)}
               className="relative group"
               style={{
                 fontSize: 'clamp(9px, 0.9vw, 11px)',
@@ -84,7 +91,7 @@ export default function Navigation() {
               transition={{ delay: 2 + i * 0.1, duration: 0.6 }}
               whileHover={{ color: '#D4A843' }}
             >
-              {link}
+              {link.label}
               <span
                 className="absolute -bottom-1 left-0 h-px w-0 group-hover:w-full transition-all duration-500"
                 style={{ background: 'var(--honey-gold)' }}
@@ -93,28 +100,31 @@ export default function Navigation() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <motion.a
-          href="#product"
-          className="hidden md:inline-flex items-center justify-center tracking-[0.2em] uppercase transition-all duration-300 hover:scale-105 shrink-0"
-          style={{
-            border: '1px solid var(--gold-40)',
-            color: 'var(--honey-gold)',
-            borderRadius: '2px',
-            backgroundColor: 'rgba(26, 20, 16, 0.4)',
-            fontSize: 'clamp(9px, 0.9vw, 11px)',
-            padding: 'clamp(8px, 1vw, 12px) clamp(16px, 2vw, 28px)',
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.4, duration: 0.8 }}
-          whileHover={{
-            borderColor: 'var(--gold-90)',
-            boxShadow: '0 0 20px var(--gold-15)',
-          }}
-        >
-          Order Now
-        </motion.a>
+        {/* Language switcher + CTA */}
+        <div className="hidden md:flex items-center gap-4 shrink-0">
+          <LanguageSwitcher lang={lang} />
+          <motion.a
+            href="#product"
+            className="inline-flex items-center justify-center tracking-[0.2em] uppercase transition-all duration-300 hover:scale-105"
+            style={{
+              border: '1px solid var(--gold-40)',
+              color: 'var(--honey-gold)',
+              borderRadius: '2px',
+              backgroundColor: 'rgba(26, 20, 16, 0.4)',
+              fontSize: 'clamp(9px, 0.9vw, 11px)',
+              padding: 'clamp(8px, 1vw, 12px) clamp(16px, 2vw, 28px)',
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.4, duration: 0.8 }}
+            whileHover={{
+              borderColor: 'var(--gold-90)',
+              boxShadow: '0 0 20px var(--gold-15)',
+            }}
+          >
+            {dict.orderNow}
+          </motion.a>
+        </div>
 
         {/* Hamburger */}
         <button
@@ -153,8 +163,8 @@ export default function Navigation() {
           >
             {navLinks.map((link, i) => (
               <motion.button
-                key={link}
-                onClick={() => scrollTo(link)}
+                key={link.id}
+                onClick={() => scrollTo(link.id)}
                 className="block py-5 font-serif tracking-widest uppercase"
                 style={{
                   fontSize: 'clamp(28px, 8vw, 48px)',
@@ -168,7 +178,7 @@ export default function Navigation() {
                 transition={{ delay: i * 0.08, duration: 0.5 }}
                 whileHover={{ color: 'var(--honey-gold)', x: 8 }}
               >
-                {link}
+                {link.label}
               </motion.button>
             ))}
             <motion.a
@@ -184,8 +194,16 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Order Now
+              {dict.orderNow}
             </motion.a>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{ marginTop: 24 }}
+            >
+              <LanguageSwitcher lang={lang} />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

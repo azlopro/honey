@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { StoryDict } from '@/types/dict'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -155,10 +156,10 @@ export function ThyLandscapeVisual()     { return <PhotoVisual src="/images/natu
 export function MoonVisual()             { return <PhotoVisual src="/images/big-orange-moon-over-trees-and-house-and-windmills.jpg" alt="Full orange moon rising over Danish farmland" label="Danish countryside"      position="center 60%" /> }
 export function NorthernLightsVisual()   { return <PhotoVisual src="/images/northeren-lights-thy.jpg"                               alt="Northern lights over a fishing boat, Thy"     label="Northern lights, Thy"    position="center 40%" /> }
 export function SealVisual()             { return <PhotoVisual src="/images/Smiling-seal.jpg"                                       alt="Harbour seal on the rocks, Danish coast"      label="Wild coastal life"       position="center 30%" /> }
-export function SunsetMeadowVisual()     { return <PhotoVisual src="/images/very-nice-sunset-in-the-meadows.jpg"                    alt="Golden sunset over coastal wetlands, Thy"     label="Coastal wetlands, Thy"   position="center 50%" /> }
+export function SunsetMeadowVisual({ label = 'Coastal wetlands, Thy' }: { label?: string }) { return <PhotoVisual src="/images/very-nice-sunset-in-the-meadows.jpg" alt="Golden sunset over coastal wetlands, Thy" label={label} position="center 50%" /> }
 
 /* ── Hex cell visual ──────────────────────────────────────────────── */
-function HoneycombVisual() {
+function HoneycombVisual({ label = 'Hexagonal perfection' }: { label?: string }) {
   const hexes = [
     { x: 100, y: 80, filled: true, delay: 0.1 }, { x: 160, y: 80, filled: false, delay: 0.15 },
     { x: 220, y: 80, filled: true, delay: 0.2 }, { x: 70, y: 133, filled: false, delay: 0.25 },
@@ -213,7 +214,7 @@ function HoneycombVisual() {
       </svg>
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, var(--charcoal-70) 100%)' }} />
       <div className="absolute bottom-0 inset-x-0 pb-4 text-center">
-        <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.25em' }}>Hexagonal perfection</p>
+        <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.25em' }}>{label}</p>
       </div>
     </div>
   )
@@ -286,7 +287,7 @@ function FlowerVisual() {
 }
 
 /* ── Drip visual ──────────────────────────────────────────────────── */
-function DripVisual() {
+function DripVisual({ label = 'Unfiltered. Unprocessed.' }: { label?: string }) {
   return (
     <div
       className="relative overflow-hidden rounded"
@@ -366,14 +367,14 @@ function DripVisual() {
       </svg>
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, var(--gold-10) 0%, transparent 70%)' }} />
       <div className="absolute bottom-0 inset-x-0 pb-4 text-center">
-        <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.25em' }}>Unfiltered. Unprocessed.</p>
+        <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.25em' }}>{label}</p>
       </div>
     </div>
   )
 }
 
 /* ── Main section ─────────────────────────────────────────────────── */
-export default function ScrollStory() {
+export default function ScrollStory({ dict }: { dict: StoryDict }) {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -389,29 +390,17 @@ export default function ScrollStory() {
     return () => ctx.revert()
   }, [])
 
-  const chapters = [
-    {
-      number: '01 / Origin',
-      title: 'Born on the wild coast.',
-      body: 'Our single-origin honey is harvested from wild coastal landscapes along the Danish shoreline — untouched by pesticides, far from industry. Every jar carries the living character of the North Sea coast.',
-      side: 'left' as const,
-      visual: <SunsetMeadowVisual />,
-    },
-    {
-      number: '02 / Craft',
-      title: 'Architecture of flavour.',
-      body: 'Bees engineer perfection — hexagonal chambers calibrated to the millimetre. We simply preserve what they create: nothing added, nothing removed.',
-      side: 'right' as const,
-      visual: <HoneycombVisual />,
-    },
-    {
-      number: '03 / Purity',
-      title: 'Raw. Unfiltered. Alive.',
-      body: 'HONEY 56° honey is cold-extracted to preserve every enzyme, pollen grain, and antioxidant. What reaches you is exactly what the hive intended.',
-      side: 'left' as const,
-      visual: <DripVisual />,
-    },
-  ]
+  const sides = ['left', 'right', 'left'] as const
+  const chapters = dict.chapters.map((ch, i) => ({
+    number: ch.number,
+    title: ch.title,
+    body: ch.body,
+    side: sides[i],
+    visual:
+      i === 0 ? <SunsetMeadowVisual label={ch.photoLabel} /> :
+      i === 1 ? <HoneycombVisual label={ch.photoLabel} /> :
+      <DripVisual label={ch.photoLabel} />,
+  }))
 
   return (
     <section
@@ -443,11 +432,11 @@ export default function ScrollStory() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            The HONEY 56° Story
+            {dict.sectionLabel}
           </motion.span>
 
           <RevealText
-            text="Three reasons this honey is different."
+            text={dict.sectionHeadline}
             delay={0.1}
             className="font-serif"
             style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', color: 'var(--cream)', maxWidth: '18ch' }}
@@ -486,11 +475,7 @@ export default function ScrollStory() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          {[
-            { value: '100%', label: 'Pure honey' },
-            { value: '0', label: 'Additives' },
-            { value: '2026', label: 'Harvest batch' },
-          ].map(stat => (
+          {dict.stats.map(stat => (
             <div key={stat.label} className="text-center">
               <p className="font-serif mb-2" style={{ fontSize: 'clamp(28px, 4vw, 48px)', color: 'var(--honey-gold)' }}>{stat.value}</p>
               <p className="uppercase" style={{ fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.3em', color: 'var(--cream-35)' }}>{stat.label}</p>

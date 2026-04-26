@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "story": "Historie",
+    "craft": "Håndværk",
+    "product": "Produkt",
+    "reviews": "Anmeldelser",
+    "orderNow": "Bestil Nu"
+  },
+  "hero": {
+    "headline": ["Flydende", "Guld,", "Perfektioneret."],
+    "tagline": "Enkelt Oprindelse · Rå · Begrænset Høst",
+    "scrollLabel": "Rul",
+    "sideLeft": "Batch 2026 — Vild Kystlinje",
+    "sideRight": "350g · €38"
+  },
+  "story": {
+    "sectionLabel": "HONEY 56° Historien",
+    "sectionHeadline": "Tre grunde til at denne honning er anderledes.",
+    "chapters": [
+      {
+        "number": "01 / Oprindelse",
+        "title": "Født ved den vilde kyst.",
+        "body": "Vores enkeltoprindelses-honning er høstet fra vilde kystlandskaber langs den danske kystlinje, uberørt af pesticider og langt fra industrien. Hvert glas bærer den levende karakter af Nordsøkysten.",
+        "photoLabel": "Kystenge, Thy"
+      },
+      {
+        "number": "02 / Håndværk",
+        "title": "Smagenes arkitektur.",
+        "body": "Bier skaber perfektion: sekskantede kamre kalibreret til millimeteret. Vi bevarer blot det, de skaber. Intet tilsat, intet fjernet.",
+        "photoLabel": "Sekskantet perfektion"
+      },
+      {
+        "number": "03 / Renhed",
+        "title": "Rå. Ufiltreret. Levende.",
+        "body": "HONEY 56° honning er koldt udvundet for at bevare hvert enzym, pollenkorn og antioxidant. Det, der når dig, er præcis det, hvad bistadet havde til hensigt.",
+        "photoLabel": "Ufiltreret. Ubehandlet."
+      }
+    ],
+    "stats": [
+      { "value": "100%", "label": "Ren honning" },
+      { "value": "0", "label": "Tilsætningsstoffer" },
+      { "value": "2026", "label": "Høst-batch" }
+    ]
+  },
+  "product": {
+    "sectionLabel": "Produkterne",
+    "sectionHeadlineStart": "Vores",
+    "sectionHeadlineEm": "Kollektion.",
+    "badge": "Begrænset Batch · 2026",
+    "subtitle": "350g · Koldt udvundet",
+    "jarLabel": "Enkelt Glas · 350g",
+    "freeShipping": "Gratis fragt · Leveres inden 2–3 dage",
+    "addToCart": "Læg i kurv",
+    "buyNow": "Køb Nu — Sikker betaling",
+    "limitedNote": "Begrænset høst. Mængder genopfyldes ikke midt i sæsonen.",
+    "products": [
+      { "id": "thy-wildflower", "name": "Thy Vildblomst Honning" },
+      { "id": "creamy-thy-canola", "name": "Cremet Thy Raps Honning" }
+    ],
+    "benefits": [
+      {
+        "title": "Levende enzymer bevaret",
+        "desc": "Koldt udvundet under 35°C for at bevare naturligt forekommende enzymer, antioxidanter og pollen intakt."
+      },
+      {
+        "title": "Enkeltoprindelses terroir",
+        "desc": "Udelukkende hentet fra vilde kystnære bifarms langs den danske kystlinje. Ingen blanding, intet kompromis."
+      },
+      {
+        "title": "Nul tilsætningsstoffer. Altid.",
+        "desc": "Ingen varmebehandling, intet tilsat sukker, ingen konserveringsmidler. Det du modtager er præcis det, bierne lavede."
+      },
+      {
+        "title": "Etisk biavl",
+        "desc": "Vores partnerbifarms følger regenerative praksisser. Bier skades aldrig, bistader udtømmes aldrig for meget."
+      }
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "Hvad de siger",
+    "headline1": "Smagt af dem der",
+    "headline2": "kender forskel.",
+    "ratingLine": "4,98 · 312 anmeldelser",
+    "verifiedPurchase": "Verificeret Køb",
+    "reviews": [
+      {
+        "quote": "Den mest ekstraordinære honning jeg nogensinde har smagt. Den blomstrede kompleksitet er ulig noget fra supermarkedshylden. Dette er noget særligt.",
+        "author": "Isabelle M.",
+        "location": "Paris, Frankrig"
+      },
+      {
+        "quote": "Jeg køber dette til min restaurants ostebræt. Gæster spørger konsekvent om det. Terroiret skinner igennem, man kan smage engen.",
+        "author": "Marco F.",
+        "location": "London, UK"
+      },
+      {
+        "quote": "Vi har givet HONEY 56° som julegave tre år i træk. Præsentationen alene retfærdiggør prisen, men smagen er det, der får folk til at vende tilbage.",
+        "author": "Charlotte R.",
+        "location": "Zürich, Schweiz"
+      },
+      {
+        "quote": "Som certificeret ernæringsekspert anbefaler jeg dette til alle mine klienter. Rå, ufiltreret, og enzymprofilen er exceptionel. Sådan bør honning være.",
+        "author": "Dr. Priya N.",
+        "location": "Amsterdam, NL"
+      },
+      {
+        "quote": "Silkeblød, varm, med noter af lavendel og noget næsten karamelleagtigt. Smurt på surdejsbrød om morgenen er dette mit yndlingsritual.",
+        "author": "Thomas B.",
+        "location": "Berlin, Tyskland"
+      }
+    ]
+  },
+  "cta": {
+    "badge": "Begrænset høst · Batch 2026",
+    "headline1": "Smag",
+    "headlineEm": "forskellen",
+    "headline2": "inden den er væk.",
+    "body": "Hver høst er begrænset. Når 2026-batchen er udsolgt, ankommer den næste ikke før den følgende sæson. Reserver din nu.",
+    "primaryCta": "Bestil Nu — €38",
+    "secondaryCta": "Læs Mere",
+    "trust": {
+      "secure": "Sikker betaling",
+      "shipping": "Gratis fragt",
+      "sealed": "Forseglet & intakt"
+    }
+  },
+  "footer": {
+    "tagline": "Flydende guld fra vild dansk kyst. Enkelt oprindelse. Rå. Kompromisløs.",
+    "pagesLabel": "Sider",
+    "pages": ["Vores Historie", "Håndværket", "Produkt", "Anmeldelser", "Pressekit"],
+    "contactLabel": "Kontakt",
+    "hours": "Man–fre, 9–17 GMT",
+    "newsletterLabel": "Nyhedsbrev",
+    "newsletterPlaceholder": "din@email.com",
+    "legalLinks": ["Privatlivspolitik", "Vilkår", "Cookies"],
+    "copyright": "© 2026 HONEY 56° Ltd. Alle rettigheder forbeholdes."
+  },
+  "meta": {
+    "title": "HONEY 56° — Flydende Guld, Nydefineret",
+    "description": "Enkeltoprindelses rå honning høstet fra vilde kystlandskaber i Danmark. Begrænset 2026-batch. Kompromisløs kvalitet.",
+    "ogTitle": "HONEY 56° — Flydende Guld, Nydefineret",
+    "ogDescription": "Enkeltoprindelses rå honning høstet fra vilde kystlandskaber i Danmark."
+  }
+}

@@ -2,44 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const reviews = [
-  {
-    quote: 'The most extraordinary honey I have ever tasted. The floral complexity is unlike anything from a supermarket shelf — this is genuinely special.',
-    author: 'Isabelle M.',
-    location: 'Paris, France',
-    rating: 5,
-    verified: true,
-  },
-  {
-    quote: "I buy this for my restaurant's cheese board. Guests consistently ask about it. The terroir comes through — you can taste the meadow.",
-    author: 'Marco F.',
-    location: 'London, UK',
-    rating: 5,
-    verified: true,
-  },
-  {
-    quote: "We've been gifting HONEY 56° at Christmas for three years running. The presentation alone justifies the price — but the taste is what makes customers return.",
-    author: 'Charlotte R.',
-    location: 'Zürich, Switzerland',
-    rating: 5,
-    verified: true,
-  },
-  {
-    quote: 'As a holistic nutritionist, I recommend this to all my clients. Raw, unfiltered, and the enzyme profile is exceptional. This is honey the way it should be.',
-    author: 'Dr. Priya N.',
-    location: 'Amsterdam, NL',
-    rating: 5,
-    verified: true,
-  },
-  {
-    quote: 'Silky, warm, with notes of lavender and something almost caramel. Spread on sourdough in the morning this is my favourite ritual.',
-    author: 'Thomas B.',
-    location: 'Berlin, Germany',
-    rating: 5,
-    verified: true,
-  },
-]
+import type { TestimonialsDict } from '@/types/dict'
 
 function Stars({ count }: { count: number }) {
   return (
@@ -53,7 +16,8 @@ function Stars({ count }: { count: number }) {
   )
 }
 
-export default function Testimonials() {
+export default function Testimonials({ dict }: { dict: TestimonialsDict }) {
+  const reviews = dict.reviews.map(r => ({ ...r, rating: 5, verified: true }))
   const [active, setActive] = useState(0)
   const [dragging, setDragging] = useState(false)
   const dragStart = useRef(0)
@@ -109,7 +73,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          What they say
+          {dict.sectionLabel}
         </motion.span>
 
         <motion.h2
@@ -120,8 +84,8 @@ export default function Testimonials() {
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.9 }}
         >
-          Tasted by those who<br />
-          <em style={{ color: 'var(--honey-gold)' }}>know the difference.</em>
+          {dict.headline1}<br />
+          <em style={{ color: 'var(--honey-gold)' }}>{dict.headline2}</em>
         </motion.h2>
 
         <motion.div
@@ -133,7 +97,7 @@ export default function Testimonials() {
           transition={{ delay: 0.3 }}
         >
           <Stars count={5} />
-          <span style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>4.98 · 312 reviews</span>
+          <span style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>{dict.ratingLine}</span>
         </motion.div>
       </div>
 
@@ -195,7 +159,7 @@ export default function Testimonials() {
                       border: '1px solid var(--gold-20)', color: 'var(--gold-50)',
                       padding: '4px 10px',
                     }}>
-                      Verified Purchase
+                      {dict.verifiedPurchase}
                     </span>
                   )}
                 </div>

@@ -209,7 +209,9 @@ function Particles() {
 }
 
 /* ── Hero ─────────────────────────────────────────────────────────── */
-export default function Hero() {
+import type { HeroDict } from '@/types/dict'
+
+export default function Hero({ dict }: { dict: HeroDict }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const jarRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
@@ -238,7 +240,7 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const headline = ['Liquid', 'Gold,', 'Perfected.']
+  const headline = dict.headline
 
   return (
     <section
@@ -339,8 +341,30 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 2.5, duration: 1 }}
           >
-            Single-Origin · Raw · Limited Harvest
+            {dict.tagline}
           </motion.p>
+          
+          {/* Scroll indicator moved here so it's vertically flowing under the text and never overlaps */}
+          <motion.div
+            className="flex flex-col items-center gap-2"
+            style={{ zIndex: 5, marginTop: 'clamp(32px, 6vh, 60px)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 3, duration: 1 }}
+          >
+            <span className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '8px', letterSpacing: '0.4em' }}>
+              {dict.scrollLabel}
+            </span>
+            <div className="relative" style={{ width: 1, height: 40, background: 'var(--gold-15)' }}>
+              <motion.div
+                className="absolute top-0 left-0 w-full"
+                style={{ background: 'var(--honey-gold)', height: '40%' }}
+                animate={{ y: [0, 24, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </div>
+          </motion.div>
+
         </div>
       </div>
 
@@ -357,7 +381,7 @@ export default function Hero() {
           className="uppercase"
           style={{ color: 'var(--gold-40)', writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: '8px', letterSpacing: '0.4em' }}
         >
-          Batch 2026 — Wild Coastal
+          {dict.sideLeft}
         </span>
       </motion.div>
 
@@ -373,30 +397,9 @@ export default function Hero() {
           className="uppercase"
           style={{ color: 'var(--gold-40)', writingMode: 'vertical-rl', fontSize: '8px', letterSpacing: '0.4em' }}
         >
-          350g · €38
+          {dict.sideRight}
         </span>
         <div className="h-14 w-px" style={{ background: 'linear-gradient(to top, transparent, var(--gold-40))' }} />
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{ zIndex: 5 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 3, duration: 1 }}
-      >
-        <span className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '8px', letterSpacing: '0.4em' }}>
-          Scroll
-        </span>
-        <div className="relative" style={{ width: 1, height: 40, background: 'var(--gold-15)' }}>
-          <motion.div
-            className="absolute top-0 left-0 w-full"
-            style={{ background: 'var(--honey-gold)', height: '40%' }}
-            animate={{ y: [0, 24, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </div>
       </motion.div>
     </section>
   )

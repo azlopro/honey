@@ -5,10 +5,11 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { CtaDict } from '@/types/dict'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function CTASection() {
+export default function CTASection({ dict }: { dict: CtaDict }) {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -83,7 +84,7 @@ export default function CTASection() {
           >
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--honey-gold)', flexShrink: 0 }} />
             <span className="uppercase" style={{ color: 'var(--gold-70)', fontSize: 'clamp(9px, 0.9vw, 11px)', letterSpacing: '0.4em' }}>
-              Limited harvest · Batch 2026
+              {dict.badge}
             </span>
           </motion.div>
 
@@ -96,8 +97,8 @@ export default function CTASection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Taste the <em style={{ color: 'var(--honey-gold)' }}>difference</em><br />
-            before it&apos;s gone.
+            {dict.headline1} <em style={{ color: 'var(--honey-gold)' }}>{dict.headlineEm}</em><br />
+            {dict.headline2}
           </motion.h2>
 
           {/* Subtext */}
@@ -108,8 +109,7 @@ export default function CTASection() {
             viewport={{ once: true }}
             transition={{ delay: 0.25, duration: 0.8 }}
           >
-            Each harvest is finite. When the 2026 batch sells out, the next won&apos;t arrive until the following season.
-            Reserve yours now.
+            {dict.body}
           </motion.p>
 
           {/* CTA buttons */}
@@ -147,7 +147,7 @@ export default function CTASection() {
                 whileHover={{ x: '100%' }}
                 transition={{ duration: 0.5 }}
               />
-              <span className="relative z-10">Order Now — €38</span>
+              <span className="relative z-10">{dict.primaryCta}</span>
               <motion.svg
                 className="relative z-10 w-4 h-4 shrink-0"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
@@ -173,7 +173,7 @@ export default function CTASection() {
               }}
               whileHover={{ borderColor: 'var(--gold-60)', color: 'var(--honey-gold)' }}
             >
-              Learn More
+              {dict.secondaryCta}
             </motion.a>
           </motion.div>
 
@@ -187,9 +187,9 @@ export default function CTASection() {
             transition={{ delay: 0.5 }}
           >
             {[
-              { icon: '🔒', label: 'Secure payment' },
-              { icon: '🚚', label: 'Free shipping' },
-              { icon: '✦', label: 'Sealed & intact' },
+              { icon: '🔒', label: dict.trust.secure },
+              { icon: '🚚', label: dict.trust.shipping },
+              { icon: '✦', label: dict.trust.sealed },
             ].map(item => (
               <div key={item.label} className="flex items-center gap-2">
                 <span style={{ fontSize: 13 }}>{item.icon}</span>

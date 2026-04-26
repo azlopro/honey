@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "story": "Story",
+    "craft": "Craft",
+    "product": "Product",
+    "reviews": "Reviews",
+    "orderNow": "Order Now"
+  },
+  "hero": {
+    "headline": ["Liquid", "Gold,", "Perfected."],
+    "tagline": "Single-Origin · Raw · Limited Harvest",
+    "scrollLabel": "Scroll",
+    "sideLeft": "Batch 2026 — Wild Coastal",
+    "sideRight": "350g · €38"
+  },
+  "story": {
+    "sectionLabel": "The HONEY 56° Story",
+    "sectionHeadline": "Three reasons this honey is different.",
+    "chapters": [
+      {
+        "number": "01 / Origin",
+        "title": "Born on the wild coast.",
+        "body": "Our single-origin honey is harvested from wild coastal landscapes along the Danish shoreline, untouched by pesticides and far from industry. Every jar carries the living character of the North Sea coast.",
+        "photoLabel": "Coastal wetlands, Thy"
+      },
+      {
+        "number": "02 / Craft",
+        "title": "Architecture of flavour.",
+        "body": "Bees engineer perfection: hexagonal chambers calibrated to the millimetre. We preserve what they create. Nothing added, nothing removed.",
+        "photoLabel": "Hexagonal perfection"
+      },
+      {
+        "number": "03 / Purity",
+        "title": "Raw. Unfiltered. Alive.",
+        "body": "HONEY 56° honey is cold-extracted to preserve every enzyme, pollen grain, and antioxidant. What reaches you is exactly what the hive intended.",
+        "photoLabel": "Unfiltered. Unprocessed."
+      }
+    ],
+    "stats": [
+      { "value": "100%", "label": "Pure honey" },
+      { "value": "0", "label": "Additives" },
+      { "value": "2026", "label": "Harvest batch" }
+    ]
+  },
+  "product": {
+    "sectionLabel": "The Products",
+    "sectionHeadlineStart": "Our",
+    "sectionHeadlineEm": "Collection.",
+    "badge": "Limited Batch · 2026",
+    "subtitle": "350g · Cold-extracted",
+    "jarLabel": "Single Jar · 350g",
+    "freeShipping": "Free shipping · Ships in 2–3 days",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now — Secure Checkout",
+    "limitedNote": "Limited harvest: quantities are not replenished mid-season.",
+    "products": [
+      { "id": "thy-wildflower", "name": "Thy Wildflower Honey" },
+      { "id": "creamy-thy-canola", "name": "Creamy Thy Canola Honey" }
+    ],
+    "benefits": [
+      {
+        "title": "Living enzymes preserved",
+        "desc": "Cold-extracted below 35°C to keep naturally occurring enzymes, antioxidants, and pollen intact."
+      },
+      {
+        "title": "Single-origin terroir",
+        "desc": "Sourced from wild coastal apiaries along the Danish shoreline. No blending, no compromise."
+      },
+      {
+        "title": "Zero additives. Always.",
+        "desc": "No heat treatment, no added sugars, no preservatives. What you receive is exactly what the bees made."
+      },
+      {
+        "title": "Ethical beekeeping",
+        "desc": "Our partner apiaries follow regenerative practices: bees are never harmed and hives are never over-extracted."
+      }
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "What they say",
+    "headline1": "Tasted by those who",
+    "headline2": "know the difference.",
+    "ratingLine": "4.98 · 312 reviews",
+    "verifiedPurchase": "Verified Purchase",
+    "reviews": [
+      {
+        "quote": "The most extraordinary honey I have ever tasted. The floral complexity is unlike anything from a supermarket shelf. Nothing else comes close.",
+        "author": "Isabelle M.",
+        "location": "Paris, France"
+      },
+      {
+        "quote": "I buy this for my restaurant's cheese board. Guests consistently ask about it. The terroir comes through — you can taste the meadow.",
+        "author": "Marco F.",
+        "location": "London, UK"
+      },
+      {
+        "quote": "We've been gifting HONEY 56° at Christmas for three years running. The presentation alone justifies the price, but the taste is what makes customers return.",
+        "author": "Charlotte R.",
+        "location": "Zürich, Switzerland"
+      },
+      {
+        "quote": "As a nutritional therapist, I recommend this to all my clients. Raw, unfiltered, and the enzyme profile is exceptional. This is honey the way it should be.",
+        "author": "Dr. Priya N.",
+        "location": "Amsterdam, NL"
+      },
+      {
+        "quote": "Silky, warm, with notes of lavender and something almost caramel. Spread on sourdough in the morning this is my favourite ritual.",
+        "author": "Thomas B.",
+        "location": "Berlin, Germany"
+      }
+    ]
+  },
+  "cta": {
+    "badge": "Limited harvest · Batch 2026",
+    "headline1": "Taste the",
+    "headlineEm": "difference",
+    "headline2": "before it's gone.",
+    "body": "Each harvest is finite. When the 2026 batch sells out, the next won't arrive until the following season. Reserve yours now.",
+    "primaryCta": "Order Now — €38",
+    "secondaryCta": "Learn More",
+    "trust": {
+      "secure": "Secure payment",
+      "shipping": "Free shipping",
+      "sealed": "Sealed & intact"
+    }
+  },
+  "footer": {
+    "tagline": "Liquid gold from wild coastal Denmark. Single-origin. Raw. Uncompromising.",
+    "pagesLabel": "Pages",
+    "pages": ["Our Story", "The Craft", "Product", "Reviews", "Press Kit"],
+    "contactLabel": "Contact",
+    "hours": "Mon–Fri, 9am–5pm GMT",
+    "newsletterLabel": "Newsletter",
+    "newsletterPlaceholder": "your@email.com",
+    "legalLinks": ["Privacy Policy", "Terms", "Cookies"],
+    "copyright": "© 2026 HONEY 56° Ltd. All rights reserved."
+  },
+  "meta": {
+    "title": "HONEY 56° — Liquid Gold, Redefined",
+    "description": "Single-origin raw honey harvested from wild coastal landscapes in Denmark. Limited 2026 batch. Uncompromising quality.",
+    "ogTitle": "HONEY 56° — Liquid Gold, Redefined",
+    "ogDescription": "Single-origin raw honey harvested from wild coastal landscapes in Denmark."
+  }
+}

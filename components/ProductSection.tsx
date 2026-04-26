@@ -3,29 +3,22 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence, useSpring, useTransform, useMotionValue } from 'framer-motion'
 import Image from 'next/image'
+import type { ProductDict } from '@/types/dict'
 
-const PRODUCTS = [
-  {
-    id: 'thy-wildflower',
-    badge: 'Limited Batch · 2026',
-    name: 'Thy Wildflower Honey',
-    subtitle: '350g · Cold-extracted',
-    jarLabel: 'Single Jar · 350g',
-    price: 38,
-    image: '/images/honey.jpg',
-  },
-  {
-    id: 'creamy-thy-canola',
-    badge: 'Limited Batch · 2026',
-    name: 'Creamy Thy Canola Honey',
-    subtitle: '350g · Cold-extracted',
-    jarLabel: 'Single Jar · 350g',
-    price: 38,
-    image: null,
-  },
+const PRODUCTS_STATIC = [
+  { id: 'thy-wildflower', price: 38, image: '/images/honey.jpg' as string | null },
+  { id: 'creamy-thy-canola', price: 38, image: null as string | null },
 ]
 
-type Product = typeof PRODUCTS[number]
+type Product = {
+  id: string
+  price: number
+  image: string | null
+  name: string
+  badge: string
+  subtitle: string
+  jarLabel: string
+}
 
 /* ── SVG jar placeholder ──────────────────────────────────────────── */
 function JarSVG() {
@@ -208,9 +201,17 @@ function Benefit({ icon, title, desc, delay }: { icon: React.ReactNode; title: s
 }
 
 /* ── Main section ─────────────────────────────────────────────────── */
-export default function ProductSection() {
+export default function ProductSection({ dict }: { dict: ProductDict }) {
   const [activeProduct, setActiveProduct] = useState(0)
   const [quantity, setQuantity] = useState(1)
+
+  const PRODUCTS: Product[] = PRODUCTS_STATIC.map((p, i) => ({
+    ...p,
+    name: dict.products[i]?.name ?? p.id,
+    badge: dict.badge,
+    subtitle: dict.subtitle,
+    jarLabel: dict.jarLabel,
+  }))
 
   const prev = () => setActiveProduct(a => (a - 1 + PRODUCTS.length) % PRODUCTS.length)
   const next = () => setActiveProduct(a => (a + 1) % PRODUCTS.length)
@@ -219,28 +220,14 @@ export default function ProductSection() {
 
   const product = PRODUCTS[activeProduct] || PRODUCTS[0]
 
-  const benefits = [
-    {
-      icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" /></svg>),
-      title: 'Living enzymes preserved',
-      desc: 'Cold-extracted below 35°C to keep naturally occurring enzymes, antioxidants, and pollen intact.',
-    },
-    {
-      icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>),
-      title: 'Single-origin terroir',
-      desc: 'Sourced exclusively from wild coastal apiaries along the Danish shoreline — no blending, no compromise.',
-    },
-    {
-      icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>),
-      title: 'Zero additives. Always.',
-      desc: 'No heat treatment, no added sugars, no preservatives. What you receive is exactly what the bees made.',
-    },
-    {
-      icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>),
-      title: 'Ethical beekeeping',
-      desc: 'Our partner apiaries follow regenerative practices — bees are never harmed, hives are never over-extracted.',
-    },
+  const benefitIcons = [
+    (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" /></svg>),
+    (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>),
+    (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>),
+    (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>),
   ]
+
+  const benefits = dict.benefits.map((b, i) => ({ ...b, icon: benefitIcons[i] }))
 
   return (
     <section
@@ -261,7 +248,7 @@ export default function ProductSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            The Products
+            {dict.sectionLabel}
           </motion.span>
           <motion.h2
             className="font-serif"
@@ -271,7 +258,7 @@ export default function ProductSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            Our <em style={{ color: 'var(--honey-gold)' }}>Collection.</em>
+            {dict.sectionHeadlineStart} <em style={{ color: 'var(--honey-gold)' }}>{dict.sectionHeadlineEm}</em>
           </motion.h2>
         </div>
 
@@ -337,7 +324,7 @@ export default function ProductSection() {
                   </p>
                   <p className="font-serif" style={{ fontSize: 'clamp(36px, 5vw, 56px)', color: 'var(--cream)' }}>€{product.price}</p>
                   <p style={{ fontSize: 'clamp(11px, 0.9vw, 13px)', marginTop: 4, color: 'var(--cream-35)' }}>
-                    Free shipping · Ships in 2–3 days
+                    {dict.freeShipping}
                   </p>
                 </div>
 
@@ -370,7 +357,7 @@ export default function ProductSection() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                 >
-                  <span className="relative z-10">Add to Cart · €{(product.price * quantity).toLocaleString()}</span>
+                  <span className="relative z-10">{dict.addToCart} · €{(product.price * quantity).toLocaleString()}</span>
                   <motion.div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, var(--honey-light) 0%, var(--honey-gold) 100%)', opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
                 </motion.a>
 
@@ -386,11 +373,11 @@ export default function ProductSection() {
                   }}
                   whileHover={{ borderColor: 'var(--gold-70)', boxShadow: '0 0 24px var(--gold-12)' }}
                 >
-                  Buy Now — Secure Checkout
+                  {dict.buyNow}
                 </motion.a>
 
                 <p className="text-center" style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-25)' }}>
-                  Limited harvest — quantities are not replenished mid-season.
+                  {dict.limitedNote}
                 </p>
               </div>
             </motion.div>

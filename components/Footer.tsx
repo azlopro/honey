@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import type { FooterDict } from '@/types/dict'
 
-export default function Footer() {
+export default function Footer({ dict }: { dict: FooterDict; lang: string }) {
   return (
     <footer
       style={{
@@ -32,7 +33,7 @@ export default function Footer() {
               </p>
             </div>
             <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', lineHeight: 1.7, maxWidth: '32ch', color: 'var(--cream-35)', fontWeight: 300 }}>
-              Liquid gold from wild coastal Denmark. Single-origin. Raw. Uncompromising.
+              {dict.tagline}
             </p>
             {/* Social */}
             <div className="flex gap-5">
@@ -53,9 +54,9 @@ export default function Footer() {
           {/* Links */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 1.2vw, 16px)' }}>
             <p className="uppercase" style={{ fontSize: 'clamp(8px, 0.8vw, 10px)', letterSpacing: '0.5em', color: 'var(--gold-40)', marginBottom: 4 }}>
-              Pages
+              {dict.pagesLabel}
             </p>
-            {['Our Story', 'The Craft', 'Product', 'Reviews', 'Press Kit'].map(link => (
+            {dict.pages.map(link => (
               <motion.a
                 key={link}
                 href="#"
@@ -71,24 +72,24 @@ export default function Footer() {
           {/* Contact + Newsletter */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(10px, 1.2vw, 16px)' }}>
             <p className="uppercase" style={{ fontSize: 'clamp(8px, 0.8vw, 10px)', letterSpacing: '0.5em', color: 'var(--gold-40)', marginBottom: 4 }}>
-              Contact
+              {dict.contactLabel}
             </p>
             <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-35)', fontWeight: 300 }}>
               hello@honey56.com
             </p>
             <p style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', lineHeight: 1.6, color: 'var(--cream-20)', fontWeight: 300 }}>
-              Mon–Fri, 9am–5pm GMT
+              {dict.hours}
             </p>
 
             {/* Newsletter */}
             <div style={{ paddingTop: 'clamp(8px, 1vw, 16px)', display: 'flex', flexDirection: 'column', gap: 8 }}>
               <p className="uppercase" style={{ fontSize: 'clamp(8px, 0.8vw, 10px)', letterSpacing: '0.4em', color: 'var(--gold-30)' }}>
-                Newsletter
+                {dict.newsletterLabel}
               </p>
               <div className="flex" style={{ border: '1px solid var(--gold-20)' }}>
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={dict.newsletterPlaceholder}
                   className="flex-1 bg-transparent outline-none"
                   style={{
                     padding: 'clamp(8px, 1vw, 10px) clamp(10px, 1.2vw, 14px)',
@@ -120,10 +121,10 @@ export default function Footer() {
           style={{ gap: 'clamp(12px, 1.5vw, 16px)', paddingTop: 'clamp(24px, 3vw, 40px)' }}
         >
           <p style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-20)', fontWeight: 300 }}>
-            © 2026 HONEY 56° Ltd. All rights reserved.
+            {dict.copyright}
           </p>
           <div className="flex gap-6">
-            {['Privacy Policy', 'Terms', 'Cookies'].map(link => (
+            {dict.legalLinks.map(link => (
               <motion.a
                 key={link}
                 href="#"

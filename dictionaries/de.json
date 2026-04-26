@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "story": "Geschichte",
+    "craft": "Handwerk",
+    "product": "Produkt",
+    "reviews": "Bewertungen",
+    "orderNow": "Jetzt Bestellen"
+  },
+  "hero": {
+    "headline": ["Flüssiges", "Gold,", "Perfektioniert."],
+    "tagline": "Einzelherkunft · Roh · Begrenzte Ernte",
+    "scrollLabel": "Scrollen",
+    "sideLeft": "Charge 2026 · Wilde Küste",
+    "sideRight": "350g · €38"
+  },
+  "story": {
+    "sectionLabel": "Die HONEY 56° Geschichte",
+    "sectionHeadline": "Drei Gründe, warum dieser Honig anders ist.",
+    "chapters": [
+      {
+        "number": "01 / Herkunft",
+        "title": "Geboren an der wilden Küste.",
+        "body": "Unser Honig mit Einzelherkunft wird aus wilden Küstenlandschaften entlang der dänischen Küstenlinie geerntet, unberührt von Pestiziden, weit von der Industrie entfernt. Jedes Glas trägt den lebendigen Charakter der Nordseeküste.",
+        "photoLabel": "Küstenwiesen, Thy"
+      },
+      {
+        "number": "02 / Handwerk",
+        "title": "Architektur des Geschmacks.",
+        "body": "Bienen erschaffen Perfektion — sechseckige Kammern, auf den Millimeter kalibriert. Wir bewahren einfach, was sie erschaffen: nichts hinzugefügt, nichts entfernt.",
+        "photoLabel": "Sechseckige Perfektion"
+      },
+      {
+        "number": "03 / Reinheit",
+        "title": "Roh. Ungefiltert. Lebendig.",
+        "body": "HONEY 56° Honig wird kalt extrahiert, um jedes Enzym, Pollenkorn und jeden Antioxidans zu erhalten. Im Glas landet genau das, was der Bienenstock produziert hat.",
+        "photoLabel": "Ungefiltert. Unverarbeitet."
+      }
+    ],
+    "stats": [
+      { "value": "100%", "label": "Reiner Honig" },
+      { "value": "0", "label": "Zusatzstoffe" },
+      { "value": "2026", "label": "Ernte-Charge" }
+    ]
+  },
+  "product": {
+    "sectionLabel": "Die Produkte",
+    "sectionHeadlineStart": "Unsere",
+    "sectionHeadlineEm": "Kollektion.",
+    "badge": "Begrenzte Charge · 2026",
+    "subtitle": "350g · Kalt extrahiert",
+    "jarLabel": "Einzelglas · 350g",
+    "freeShipping": "Kostenloser Versand · Lieferung in 2–3 Tagen",
+    "addToCart": "In den Warenkorb",
+    "buyNow": "Jetzt Kaufen — Sicher Bezahlen",
+    "limitedNote": "Begrenzte Ernte: Mengen werden nicht mitten in der Saison aufgefüllt.",
+    "products": [
+      { "id": "thy-wildflower", "name": "Thy Wildblumen-Honig" },
+      { "id": "creamy-thy-canola", "name": "Cremiger Thy Raps-Honig" }
+    ],
+    "benefits": [
+      {
+        "title": "Lebende Enzyme erhalten",
+        "desc": "Kalt extrahiert unter 35°C, um natürlich vorkommende Enzyme, Antioxidantien und Pollen intakt zu erhalten."
+      },
+      {
+        "title": "Einzelherkunft-Terroir",
+        "desc": "Ausschließlich aus wilden Küstenimkereien entlang der dänischen Küstenlinie — kein Mischen, kein Kompromiss."
+      },
+      {
+        "title": "Null Zusatzstoffe. Immer.",
+        "desc": "Keine Wärmebehandlung, kein zugesetzter Zucker, keine Konservierungsmittel. Purer Honig, so wie die Bienen ihn hinterlassen haben."
+      },
+      {
+        "title": "Ethische Imkerei",
+        "desc": "Unsere Partnerimkereien folgen regenerativen Praktiken — Bienen werden nie verletzt, Bienenstöcke werden nie übermäßig abgeerntet."
+      }
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "Was sie sagen",
+    "headline1": "Probiert von denen, die",
+    "headline2": "den Unterschied kennen.",
+    "ratingLine": "4,98 · 312 Bewertungen",
+    "verifiedPurchase": "Verifizierter Kauf",
+    "reviews": [
+      {
+        "quote": "Der außergewöhnlichste Honig, den ich je gekostet habe. Die blumige Komplexität ist unvergleichlich mit allem aus dem Supermarktregal — das ist wirklich etwas Besonderes.",
+        "author": "Isabelle M.",
+        "location": "Paris, Frankreich"
+      },
+      {
+        "quote": "Ich kaufe das für das Käsebrett meines Restaurants. Gäste fragen ständig danach. Das Terroir kommt durch — man kann die Wiese schmecken.",
+        "author": "Marco F.",
+        "location": "London, UK"
+      },
+      {
+        "quote": "Wir verschenken HONEY 56° seit drei Jahren zu Weihnachten. Allein die Präsentation rechtfertigt den Preis — aber der Geschmack ist es, der Kunden zurückbringt.",
+        "author": "Charlotte R.",
+        "location": "Zürich, Schweiz"
+      },
+      {
+        "quote": "Als integrative Ernährungsberaterin empfehle ich das allen meinen Klienten. Roh, ungefiltert, und das Enzymprofil ist bemerkenswert. So sollte Honig sein.",
+        "author": "Dr. Priya N.",
+        "location": "Amsterdam, NL"
+      },
+      {
+        "quote": "Seidig, warm, mit Noten von Lavendel und etwas fast Karamellartigem. Auf Sauerteigbrot morgens ist das mein liebstes Ritual.",
+        "author": "Thomas B.",
+        "location": "Berlin, Deutschland"
+      }
+    ]
+  },
+  "cta": {
+    "badge": "Begrenzte Ernte · Charge 2026",
+    "headline1": "Schmecken Sie den",
+    "headlineEm": "Unterschied",
+    "headline2": "bevor er weg ist.",
+    "body": "Jede Ernte ist begrenzt. Wenn die 2026er Charge ausverkauft ist, kommt die nächste erst in der folgenden Saison. Reservieren Sie jetzt Ihre.",
+    "primaryCta": "Jetzt Bestellen — €38",
+    "secondaryCta": "Mehr Erfahren",
+    "trust": {
+      "secure": "Sichere Zahlung",
+      "shipping": "Kostenloser Versand",
+      "sealed": "Versiegelt & intakt"
+    }
+  },
+  "footer": {
+    "tagline": "Flüssiges Gold aus dem wilden dänischen Küstengebiet. Einzelherkunft. Roh. Kompromisslos.",
+    "pagesLabel": "Seiten",
+    "pages": ["Unsere Geschichte", "Das Handwerk", "Produkt", "Bewertungen", "Pressemappe"],
+    "contactLabel": "Kontakt",
+    "hours": "Mo–Fr, 9–17 Uhr GMT",
+    "newsletterLabel": "Newsletter",
+    "newsletterPlaceholder": "ihre@email.com",
+    "legalLinks": ["Datenschutz", "AGB", "Cookies"],
+    "copyright": "© 2026 HONEY 56° Ltd. Alle Rechte vorbehalten."
+  },
+  "meta": {
+    "title": "HONEY 56° — Flüssiges Gold, Neu Definiert",
+    "description": "Roh-Honig mit Einzelherkunft, geerntet aus wilden Küstenlandschaften in Dänemark. Begrenzte 2026er Charge. Kompromisslose Qualität.",
+    "ogTitle": "HONEY 56° — Flüssiges Gold, Neu Definiert",
+    "ogDescription": "Roh-Honig mit Einzelherkunft, geerntet aus wilden Küstenlandschaften in Dänemark."
+  }
+}
