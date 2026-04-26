@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="sm:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(12px, 1.5vw, 20px)' }}>
             <div>
               <p className="font-serif uppercase" style={{ fontSize: 'clamp(18px, 2vw, 24px)', letterSpacing: '0.35em', color: 'var(--honey-gold)' }}>
-                Aurum
+                HONEY <span className="font-cormorant font-light lining-nums">56°</span>
               </p>
               <p className="uppercase" style={{ fontSize: 'clamp(7px, 0.7vw, 9px)', letterSpacing: '0.5em', marginTop: 4, color: 'var(--gold-35)' }}>
                 Honey
@@ -74,7 +74,7 @@ export default function Footer() {
               Contact
             </p>
             <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-35)', fontWeight: 300 }}>
-              hello@aurumhoney.com
+              hello@honey56.com
             </p>
             <p style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', lineHeight: 1.6, color: 'var(--cream-20)', fontWeight: 300 }}>
               Mon–Fri, 9am–5pm GMT
@@ -120,7 +120,7 @@ export default function Footer() {
           style={{ gap: 'clamp(12px, 1.5vw, 16px)', paddingTop: 'clamp(24px, 3vw, 40px)' }}
         >
           <p style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-20)', fontWeight: 300 }}>
-            © 2026 Aurum Honey Ltd. All rights reserved.
+            © 2026 HONEY 56° Ltd. All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms', 'Cookies'].map(link => (

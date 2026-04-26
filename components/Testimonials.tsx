@@ -19,7 +19,7 @@ const reviews = [
     verified: true,
   },
   {
-    quote: "We've been gifting Aurum at Christmas for three years running. The presentation alone justifies the price — but the taste is what makes customers return.",
+    quote: "We've been gifting HONEY 56° at Christmas for three years running. The presentation alone justifies the price — but the taste is what makes customers return.",
     author: 'Charlotte R.',
     location: 'Zürich, Switzerland',
     rating: 5,

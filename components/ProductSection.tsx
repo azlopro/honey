@@ -69,7 +69,7 @@ function JarSVG() {
       <rect x="72" y="42" width="136" height="19" rx="6" fill="rgba(255,255,255,0.05)" />
       <rect x="77" y="78" width="126" height="5" rx="2" fill="rgba(0,0,0,0.35)" />
       <rect x="56" y="198" width="168" height="108" rx="3" fill="rgba(26,20,16,0.28)" stroke="rgba(212,168,67,0.18)" strokeWidth="0.5" />
-      <text x="140" y="237" textAnchor="middle" fontFamily="Georgia, serif" fontSize="12" letterSpacing="7" fill="rgba(212,168,67,0.9)">AURUM</text>
+      <text x="140" y="237" textAnchor="middle" fontFamily="Georgia, serif" fontSize="12" letterSpacing="7" fill="rgba(212,168,67,0.9)">HONEY <tspan fontFamily="var(--font-cormorant), Cormorant Garamond, serif" fontWeight="300" style={{ fontVariantNumeric: 'lining-nums' }}>56°</tspan></text>
       <line x1="82" y1="246" x2="198" y2="246" stroke="rgba(212,168,67,0.25)" strokeWidth="0.5" />
       <text x="140" y="260" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7.5" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
     </svg>

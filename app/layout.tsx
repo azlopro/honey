@@ -26,10 +26,10 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'AURUM — Liquid Gold, Redefined',
+  title: 'HONEY 56° — Liquid Gold, Redefined',
   description: 'Single-origin raw honey harvested from wild coastal landscapes in Denmark. Limited 2026 batch. Uncompromising quality.',
   openGraph: {
-    title: 'AURUM — Liquid Gold, Redefined',
+    title: 'HONEY 56° — Liquid Gold, Redefined',
     description: 'Single-origin raw honey harvested from wild coastal landscapes in Denmark.',
     type: 'website',
   },

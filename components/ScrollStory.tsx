@@ -407,7 +407,7 @@ export default function ScrollStory() {
     {
       number: '03 / Purity',
       title: 'Raw. Unfiltered. Alive.',
-      body: 'Aurum honey is cold-extracted to preserve every enzyme, pollen grain, and antioxidant. What reaches you is exactly what the hive intended.',
+      body: 'HONEY 56° honey is cold-extracted to preserve every enzyme, pollen grain, and antioxidant. What reaches you is exactly what the hive intended.',
       side: 'left' as const,
       visual: <DripVisual />,
     },
@@ -443,7 +443,7 @@ export default function ScrollStory() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            The Aurum Story
+            The HONEY 56° Story
           </motion.span>
 
           <RevealText

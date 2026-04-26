@@ -152,7 +152,7 @@ function HoneyJar() {
       <rect x="78" y="70" width="124" height="1" rx="0.5" fill="rgba(212,168,67,0.15)" />
 
       <rect x="60" y="195" width="160" height="100" rx="3" fill="rgba(26,20,16,0.25)" stroke="rgba(212,168,67,0.2)" strokeWidth="0.5" />
-      <text x="140" y="232" textAnchor="middle" fontFamily="Georgia, serif" fontSize="11" letterSpacing="6" fill="rgba(212,168,67,0.85)" style={{ textTransform: 'uppercase' }}>AURUM</text>
+      <text x="140" y="232" textAnchor="middle" fontFamily="Georgia, serif" fontSize="11" letterSpacing="6" fill="rgba(212,168,67,0.85)" style={{ textTransform: 'uppercase' }}>HONEY <tspan fontFamily="var(--font-cormorant), Cormorant Garamond, serif" fontWeight="300" style={{ fontVariantNumeric: 'lining-nums' }}>56°</tspan></text>
       <line x1="85" y1="240" x2="195" y2="240" stroke="rgba(212,168,67,0.3)" strokeWidth="0.5" />
       <text x="140" y="254" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
       <text x="140" y="272" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.35)" letterSpacing="2">SINGLE ORIGIN</text>

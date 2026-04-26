@@ -92,7 +92,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
                 className="font-serif text-4xl tracking-[0.3em] uppercase"
                 style={{ color: 'var(--honey-gold)', letterSpacing: '0.4em' }}
               >
-                Aurum
+                HONEY <span className="font-cormorant font-light lining-nums">56°</span>
               </p>
               <p
                 className="mt-1 text-xs tracking-[0.5em] uppercase"

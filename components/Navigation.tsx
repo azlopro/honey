@@ -54,13 +54,13 @@ export default function Navigation() {
             className="font-serif tracking-[0.25em] uppercase group-hover:opacity-80 transition-opacity duration-300"
             style={{ fontSize: 'clamp(16px, 2vw, 22px)', color: 'var(--honey-gold)' }}
           >
-            Aurum
+            HONEY <span className="font-cormorant font-light lining-nums">56°</span>
           </span>
           <span
             className="tracking-[0.5em] uppercase"
             style={{ fontSize: 'clamp(7px, 0.8vw, 10px)', color: 'var(--gold-40)' }}
           >
-            Honey
+            Thy
           </span>
         </motion.div>
 
