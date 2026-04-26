@@ -51,6 +51,7 @@
     "addToCart": "Add to Cart",
     "buyNow": "Buy Now — Secure Checkout",
     "limitedNote": "Limited harvest: quantities are not replenished mid-season.",
+    "bottleNote": "Bottles are sourced through our local community partners and may vary between batches — a natural reflection of the collective care that makes this honey possible.",
     "products": [
       { "id": "thy-wildflower", "name": "Thy Wildflower Honey", "subtitle": "350g · Cold-extracted", "jarLabel": "Squeeze Tube · 350g" },
       { "id": "creamy-thy-canola", "name": "Creamy Thy Canola Honey", "subtitle": "450g · Cold-extracted", "jarLabel": "Single Jar · 450g" }

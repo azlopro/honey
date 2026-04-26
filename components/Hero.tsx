@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import gsap from 'gsap'
+import Image from 'next/image'
 
 /* ── Crossfading video background ─────────────────────────────────── */
 const HERO_VIDEOS = ['/videos/thy1.mp4', '/videos/thy2.mp4', '/videos/thy3.mp4']
@@ -68,99 +69,18 @@ function HeroVideo() {
   )
 }
 
-/* ── Honey Jar SVG ────────────────────────────────────────────────── */
+/* ── Honey Bottle Image ───────────────────────────────────────────── */
 function HoneyJar() {
   return (
-    <svg
-      viewBox="0 0 280 380"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-      style={{ filter: 'drop-shadow(0 40px 80px var(--gold-35))' }}
-    >
-      <defs>
-        <linearGradient id="jarBody" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#F0C87A" stopOpacity="0.9" />
-          <stop offset="40%" stopColor="#D4A843" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="#8B5E2A" stopOpacity="0.8" />
-        </linearGradient>
-        <linearGradient id="jarShine" x1="0" y1="0" x2="0.3" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="lidGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#4A3010" />
-          <stop offset="100%" stopColor="#2C1E12" />
-        </linearGradient>
-        <linearGradient id="lidShine" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#8B6A3A" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#8B6A3A" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="honeyFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#F0C87A" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#B8860B" stopOpacity="0.9" />
-        </linearGradient>
-        <radialGradient id="glowCenter" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#F0C87A" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#D4A843" stopOpacity="0" />
-        </radialGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="4" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-        <clipPath id="jarClip">
-          <path d="M55 110 Q40 130 40 160 L40 310 Q40 340 70 340 L210 340 Q240 340 240 310 L240 160 Q240 130 225 110 Z" />
-        </clipPath>
-      </defs>
-
-      <path
-        d="M57 115 Q42 134 42 162 L42 308 Q42 338 70 338 L210 338 Q238 338 238 308 L238 162 Q238 134 223 115 Z"
-        fill="url(#jarBody)"
-        opacity="0.95"
-      />
-      <ellipse cx="140" cy="175" rx="92" ry="14" fill="#F0C87A" opacity="0.5" />
-      <ellipse cx="140" cy="173" rx="88" ry="11" fill="#FAE8B4" opacity="0.25" />
-
-      <g clipPath="url(#jarClip)" opacity="0.12">
-        {[0, 1, 2, 3, 4].map(row =>
-          [0, 1, 2, 3].map(col => {
-            const x = 50 + col * 48 + (row % 2 === 1 ? 24 : 0)
-            const y = 160 + row * 42
-            const r = 22
-            const pts = Array.from({ length: 6 }, (_, i) => {
-              const a = (Math.PI / 3) * i - Math.PI / 6
-              return `${x + r * Math.cos(a)},${y + r * Math.sin(a)}`
-            }).join(' ')
-            return (
-              <polygon key={`${row}-${col}`} points={pts} fill="none" stroke="#FAF6EF" strokeWidth="1" />
-            )
-          })
-        )}
-      </g>
-
-      <path d="M57 115 Q42 135 42 163 L42 260 Q55 250 70 200 L72 115 Z" fill="url(#jarShine)" opacity="0.5" />
-      <path d="M223 115 Q238 135 238 163 L238 260 Q225 250 215 200 L213 115 Z" fill="url(#jarShine)" opacity="0.18" />
-      <path d="M55 110 Q40 130 40 160 L40 310 Q40 340 70 340 L210 340 Q240 340 240 310 L240 160 Q240 130 225 110 Z" fill="none" stroke="rgba(212,168,67,0.3)" strokeWidth="1" />
-
-      <rect x="90" y="80" width="100" height="35" rx="4" fill="url(#jarBody)" opacity="0.7" stroke="rgba(212,168,67,0.2)" strokeWidth="1" />
-      <rect x="95" y="82" width="40" height="31" rx="2" fill="url(#jarShine)" opacity="0.4" />
-
-      <rect x="75" y="48" width="130" height="38" rx="6" fill="url(#lidGrad)" />
-      <rect x="75" y="48" width="130" height="18" rx="6" fill="url(#lidShine)" />
-      <rect x="80" y="82" width="120" height="5" rx="2" fill="#1A1410" opacity="0.5" />
-      <rect x="78" y="60" width="124" height="2" rx="1" fill="rgba(212,168,67,0.3)" />
-      <rect x="78" y="70" width="124" height="1" rx="0.5" fill="rgba(212,168,67,0.15)" />
-
-      <rect x="60" y="195" width="160" height="100" rx="3" fill="rgba(26,20,16,0.25)" stroke="rgba(212,168,67,0.2)" strokeWidth="0.5" />
-      <text x="140" y="232" textAnchor="middle" fontFamily="Georgia, serif" fontSize="11" letterSpacing="6" fill="rgba(212,168,67,0.85)" style={{ textTransform: 'uppercase' }}>HONEY <tspan fontFamily="var(--font-cormorant), Cormorant Garamond, serif" fontWeight="300" style={{ fontVariantNumeric: 'lining-nums' }}>56°</tspan></text>
-      <line x1="85" y1="240" x2="195" y2="240" stroke="rgba(212,168,67,0.3)" strokeWidth="0.5" />
-      <text x="140" y="254" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
-      <text x="140" y="272" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.35)" letterSpacing="2">SINGLE ORIGIN</text>
-      <text x="140" y="285" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.25)">350g</text>
-
-      <path d="M148 86 Q148 100 144 108 Q141 114 144 120 Q147 114 148 108 Q150 100 152 86" fill="#D4A843" opacity="0.7" />
-      <ellipse cx="144" cy="122" rx="5" ry="6" fill="#D4A843" opacity="0.6" />
-    </svg>
+    <Image
+      src="/images/hero-honey.png"
+      alt="HONEY 56° bottle"
+      fill
+      sizes="(max-width: 768px) 34vw, 360px"
+      quality={100}
+      style={{ objectFit: 'contain', objectPosition: 'center', filter: 'drop-shadow(0 26px 52px rgba(140,85,8,0.55))' }}
+      priority
+    />
   )
 }
 
@@ -295,7 +215,7 @@ export default function Hero({ dict }: { dict: HeroDict }) {
         style={{ zIndex: 2, paddingTop: '15px' }}
       >
         {/* Jar — 3-layer stack preserved (float + GSAP parallax) */}
-        <div style={{ width: 'clamp(160px, 26vw, 280px)', height: 'clamp(220px, 35vw, 380px)', flexShrink: 0 }}>
+        <div style={{ width: 'clamp(200px, 34vw, 360px)', height: 'clamp(280px, 46vw, 490px)', flexShrink: 0 }}>
           <div style={{ width: '100%', height: '100%', animation: 'float 7s ease-in-out infinite' }}>
             <div
               ref={jarRef}

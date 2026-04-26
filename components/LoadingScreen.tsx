@@ -83,7 +83,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
 
             {/* Brand mark */}
             <motion.div
-              className="mt-10 text-center"
+              className="mt-8 text-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
@@ -102,29 +102,31 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
               </p>
             </motion.div>
 
-            {/* Progress bar */}
-            <div
-              className="overflow-hidden"
-              style={{ width: 120, height: 1, background: 'var(--gold-15)', marginTop: 48 }}
-            >
-              <motion.div
-                className="h-full"
-                style={{
-                  background: 'linear-gradient(90deg, #8B5E2A, #D4A843, #F0C87A)',
-                  width: `${progress}%`,
-                  transition: 'width 0.1s linear',
-                }}
-              />
-            </div>
+            {/* Progress bar + counter */}
+            <div className="flex flex-col items-center" style={{ marginTop: 24, gap: 10 }}>
+              <div
+                className="overflow-hidden"
+                style={{ width: 120, height: 1, background: 'var(--gold-15)' }}
+              >
+                <motion.div
+                  className="h-full"
+                  style={{
+                    background: 'linear-gradient(90deg, #8B5E2A, #D4A843, #F0C87A)',
+                    width: `${progress}%`,
+                    transition: 'width 0.1s linear',
+                  }}
+                />
+              </div>
 
-            <motion.p
-              className="tabular-nums"
-              style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.2em', marginTop: 44 }}
-              animate={{ opacity: [0.4, 0.8, 0.4] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              {Math.round(progress).toString().padStart(3, '0')}
-            </motion.p>
+              <motion.p
+                className="tabular-nums"
+                style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.2em' }}
+                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                {Math.round(progress).toString().padStart(3, '0')}
+              </motion.p>
+            </div>
           </div>
         </motion.div>
       )}

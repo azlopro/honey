@@ -294,6 +294,11 @@ export default function ProductSection({ dict }: { dict: ProductDict }) {
               onPrev={prev}
               onNext={next}
             />
+            <div style={{ marginTop: 20, paddingTop: 14, borderTop: '1px solid var(--gold-10)' }}>
+              <p className="uppercase" style={{ fontSize: '9px', lineHeight: 1.8, color: 'var(--gold-40)', letterSpacing: '0.18em' }}>
+                {dict.bottleNote}
+              </p>
+            </div>
           </motion.div>
 
           {/* Info panel */}
