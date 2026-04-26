@@ -6,30 +6,21 @@ import Image from 'next/image'
 
 const PRODUCTS = [
   {
-    id: 'wildflower',
+    id: 'thy-wildflower',
     badge: 'Limited Batch · 2026',
-    name: 'Wildflower Raw Honey',
+    name: 'Thy Wildflower Honey',
     subtitle: '350g · Cold-extracted',
     jarLabel: 'Single Jar · 350g',
     price: 38,
     image: '/images/honey.jpg',
   },
   {
-    id: 'tubed-wildflower',
+    id: 'creamy-thy-canola',
     badge: 'Limited Batch · 2026',
-    name: 'Tubed Wildflower',
-    subtitle: '250g · Cold-extracted',
-    jarLabel: 'Single Tube · 250g',
-    price: 28,
-    image: null,
-  },
-  {
-    id: 'reserve',
-    badge: 'Coming Soon',
-    name: 'Reserve Blend',
+    name: 'Creamy Thy Canola Honey',
     subtitle: '350g · Cold-extracted',
     jarLabel: 'Single Jar · 350g',
-    price: 42,
+    price: 38,
     image: null,
   },
 ]
@@ -226,7 +217,7 @@ export default function ProductSection() {
 
   useEffect(() => { setQuantity(1) }, [activeProduct])
 
-  const product = PRODUCTS[activeProduct]
+  const product = PRODUCTS[activeProduct] || PRODUCTS[0]
 
   const benefits = [
     {

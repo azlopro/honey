@@ -190,7 +190,6 @@ export default function CTASection() {
               { icon: '🔒', label: 'Secure payment' },
               { icon: '🚚', label: 'Free shipping' },
               { icon: '✦', label: 'Sealed & intact' },
-              { icon: '✦', label: 'Gift-wrapped' },
             ].map(item => (
               <div key={item.label} className="flex items-center gap-2">
                 <span style={{ fontSize: 13 }}>{item.icon}</span>

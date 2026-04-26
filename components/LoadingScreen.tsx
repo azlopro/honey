@@ -41,7 +41,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
           }}
         >
           {/* Honey drip container */}
-          <div className="relative flex flex-col items-center" style={{ paddingTop: 32, paddingBottom: 32 }}>
+          <div className="relative flex flex-col items-center">
             {/* Drip track */}
             <div className="relative" style={{ width: 2, height: 80 }}>
               <motion.div
@@ -105,7 +105,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
             {/* Progress bar */}
             <div
               className="overflow-hidden"
-              style={{ width: 120, height: 1, background: 'var(--gold-15)', marginTop: 20 }}
+              style={{ width: 120, height: 1, background: 'var(--gold-15)', marginTop: 48 }}
             >
               <motion.div
                 className="h-full"
@@ -118,8 +118,8 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
             </div>
 
             <motion.p
-              className="mt-3 tabular-nums"
-              style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.2em' }}
+              className="tabular-nums"
+              style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.2em', marginTop: 44 }}
               animate={{ opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
