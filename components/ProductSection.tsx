@@ -1,13 +1,103 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { motion, AnimatePresence, useSpring, useTransform, useMotionValue } from 'framer-motion'
+import Image from 'next/image'
 
-/* ── 3D product card with tilt ────────────────────────────────────── */
-function ProductCard() {
+const PRODUCTS = [
+  {
+    id: 'wildflower',
+    badge: 'Limited Batch · 2026',
+    name: 'Wildflower Raw Honey',
+    subtitle: '350g · Cold-extracted',
+    jarLabel: 'Single Jar · 350g',
+    price: 38,
+    image: '/images/honey.jpg',
+  },
+  {
+    id: 'tubed-wildflower',
+    badge: 'Limited Batch · 2026',
+    name: 'Tubed Wildflower',
+    subtitle: '250g · Cold-extracted',
+    jarLabel: 'Single Tube · 250g',
+    price: 28,
+    image: null,
+  },
+  {
+    id: 'reserve',
+    badge: 'Coming Soon',
+    name: 'Reserve Blend',
+    subtitle: '350g · Cold-extracted',
+    jarLabel: 'Single Jar · 350g',
+    price: 42,
+    image: null,
+  },
+]
+
+type Product = typeof PRODUCTS[number]
+
+/* ── SVG jar placeholder ──────────────────────────────────────────── */
+function JarSVG() {
+  return (
+    <svg viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg"
+      style={{ width: '60%', maxWidth: 200, filter: 'drop-shadow(0 20px 60px var(--gold-40))' }}>
+      <defs>
+        <linearGradient id="pjBody" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#F0C87A" stopOpacity="0.92" />
+          <stop offset="50%" stopColor="#D4A843" stopOpacity="0.97" />
+          <stop offset="100%" stopColor="#7A4A1A" stopOpacity="0.85" />
+        </linearGradient>
+        <linearGradient id="pjShine" x1="0" y1="0" x2="0.25" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="pjLid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#5A3A18" />
+          <stop offset="100%" stopColor="#2C1E12" />
+        </linearGradient>
+        <radialGradient id="pjGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="rgba(240,200,122,0.35)" />
+          <stop offset="100%" stopColor="transparent" />
+        </radialGradient>
+        <clipPath id="pjClip">
+          <path d="M50 108 Q34 130 34 162 L34 314 Q34 346 70 346 L210 346 Q246 346 246 314 L246 162 Q246 130 230 108 Z" />
+        </clipPath>
+      </defs>
+      <ellipse cx="140" cy="250" rx="120" ry="80" fill="url(#pjGlow)" opacity="0.5" />
+      <path d="M50 108 Q34 130 34 162 L34 314 Q34 346 70 346 L210 346 Q246 346 246 314 L246 162 Q246 130 230 108 Z" fill="url(#pjBody)" />
+      <g clipPath="url(#pjClip)" opacity="0.1">
+        {[0, 1, 2, 3, 4, 5].map(row => [0, 1, 2, 3, 4].map(col => {
+          const x = 40 + col * 44 + (row % 2 === 1 ? 22 : 0), y = 155 + row * 38, r = 20
+          const pts = Array.from({ length: 6 }, (_, i) => { const a = (Math.PI / 3) * i - Math.PI / 6; return `${x + r * Math.cos(a)},${y + r * Math.sin(a)}` }).join(' ')
+          return <polygon key={`${row}-${col}`} points={pts} fill="none" stroke="#FAF6EF" strokeWidth="0.8" />
+        }))}
+      </g>
+      <path d="M53 110 Q37 132 37 164 L37 265 Q52 252 68 198 L70 110 Z" fill="url(#pjShine)" opacity="0.55" />
+      <path d="M50 108 Q34 130 34 162 L34 314 Q34 346 70 346 L210 346 Q246 346 246 314 L246 162 Q246 130 230 108 Z" fill="none" stroke="rgba(212,168,67,0.25)" strokeWidth="1" />
+      <rect x="72" y="42" width="136" height="40" rx="6" fill="url(#pjLid)" />
+      <rect x="72" y="42" width="136" height="19" rx="6" fill="rgba(255,255,255,0.05)" />
+      <rect x="77" y="78" width="126" height="5" rx="2" fill="rgba(0,0,0,0.35)" />
+      <rect x="56" y="198" width="168" height="108" rx="3" fill="rgba(26,20,16,0.28)" stroke="rgba(212,168,67,0.18)" strokeWidth="0.5" />
+      <text x="140" y="237" textAnchor="middle" fontFamily="Georgia, serif" fontSize="12" letterSpacing="7" fill="rgba(212,168,67,0.9)">AURUM</text>
+      <line x1="82" y1="246" x2="198" y2="246" stroke="rgba(212,168,67,0.25)" strokeWidth="0.5" />
+      <text x="140" y="260" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7.5" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
+    </svg>
+  )
+}
+
+/* ── 3D product card ──────────────────────────────────────────────── */
+function ProductCard({ product, active, total, onPrev, onNext }: {
+  product: Product
+  active: number
+  total: number
+  onPrev: () => void
+  onNext: () => void
+}) {
   const cardRef = useRef<HTMLDivElement>(null)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
+  const dragging = useRef(false)
+  const dragStart = useRef(0)
 
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), { stiffness: 120, damping: 20 })
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), { stiffness: 120, damping: 20 })
@@ -20,111 +110,84 @@ function ProductCard() {
     mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
     mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
   }
-
   const onMouseLeave = () => { mouseX.set(0); mouseY.set(0) }
 
+  const onDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    dragging.current = true
+    dragStart.current = 'touches' in e ? e.touches[0].clientX : e.clientX
+  }
+  const onDragEnd = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!dragging.current) return
+    dragging.current = false
+    const endX = 'changedTouches' in e ? e.changedTouches[0].clientX : e.clientX
+    const diff = dragStart.current - endX
+    if (Math.abs(diff) > 50) diff > 0 ? onNext() : onPrev()
+  }
+
   return (
-    <div style={{ perspective: 1000 }} className="relative" onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} ref={cardRef}>
-      <motion.div style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }} className="relative">
-        {/* Glow follow */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none rounded"
-          style={{
-            background: useTransform([glowX, glowY], ([x, y]: number[]) =>
-              `radial-gradient(circle at ${x}% ${y}%, var(--gold-18) 0%, transparent 60%)`),
-            zIndex: 10,
-          }}
-        />
+    <div>
+      <div style={{ perspective: 1000 }} className="relative"
+        onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} ref={cardRef}
+        onMouseDown={onDragStart} onMouseUp={onDragEnd}
+        onTouchStart={onDragStart} onTouchEnd={onDragEnd}
+      >
+        <motion.div style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }} className="relative">
+          {/* Glow follow */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none rounded"
+            style={{
+              background: useTransform([glowX, glowY], ([x, y]: number[]) =>
+                `radial-gradient(circle at ${x}% ${y}%, var(--gold-18) 0%, transparent 60%)`),
+              zIndex: 10,
+            }}
+          />
 
-        {/* Card */}
-        <div
-          className="relative overflow-hidden rounded"
-          style={{
-            background: 'linear-gradient(145deg, var(--charcoal-mid) 0%, var(--charcoal) 50%, var(--bg-deep) 100%)',
-            border: '1px solid var(--gold-12)',
-            padding: 'clamp(24px, 4vw, 56px)',
-            boxShadow: '0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 var(--gold-08)',
-          }}
-        >
-          {/* Corner marks */}
-          {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
-            <div key={i} className={`absolute ${pos} w-5 h-5`}>
-              <div className={`absolute ${i < 2 ? 'top-0' : 'bottom-0'} ${i % 2 === 0 ? 'left-0' : 'right-0'} w-full h-px`} style={{ background: 'var(--gold-30)' }} />
-              <div className={`absolute ${i < 2 ? 'top-0' : 'bottom-0'} ${i % 2 === 0 ? 'left-0' : 'right-0'} h-full w-px`} style={{ background: 'var(--gold-30)' }} />
-            </div>
-          ))}
+          {/* Card */}
+          <div
+            className="relative overflow-hidden"
+            style={{
+              border: '1px solid var(--gold-12)',
+              boxShadow: '0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 var(--gold-08)',
+              height: 'clamp(320px, 45vw, 560px)',
+            }}
+          >
+            {/* Corner marks */}
+            {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
+              <div key={i} className={`absolute ${pos} w-5 h-5 z-10`}>
+                <div className={`absolute ${i < 2 ? 'top-0' : 'bottom-0'} ${i % 2 === 0 ? 'left-0' : 'right-0'} w-full h-px`} style={{ background: 'var(--gold-30)' }} />
+                <div className={`absolute ${i < 2 ? 'top-0' : 'bottom-0'} ${i % 2 === 0 ? 'left-0' : 'right-0'} h-full w-px`} style={{ background: 'var(--gold-30)' }} />
+              </div>
+            ))}
 
-          {/* Product SVG jar */}
-          <div className="flex justify-center" style={{ marginBottom: 'clamp(20px, 3vw, 40px)' }}>
-            <motion.div
-              style={{ width: 'clamp(140px, 20vw, 240px)' }}
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <svg viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg"
-                style={{ filter: 'drop-shadow(0 20px 60px var(--gold-40))' }}>
-                <defs>
-                  <linearGradient id="pjBody" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#F0C87A" stopOpacity="0.92" />
-                    <stop offset="50%" stopColor="#D4A843" stopOpacity="0.97" />
-                    <stop offset="100%" stopColor="#7A4A1A" stopOpacity="0.85" />
-                  </linearGradient>
-                  <linearGradient id="pjShine" x1="0" y1="0" x2="0.25" y2="1">
-                    <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
-                  </linearGradient>
-                  <linearGradient id="pjLid" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#5A3A18" />
-                    <stop offset="100%" stopColor="#2C1E12" />
-                  </linearGradient>
-                  <radialGradient id="pjGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="rgba(240,200,122,0.35)" />
-                    <stop offset="100%" stopColor="transparent" />
-                  </radialGradient>
-                  <clipPath id="pjClip">
-                    <path d="M50 108 Q34 130 34 162 L34 314 Q34 346 70 346 L210 346 Q246 346 246 314 L246 162 Q246 130 230 108 Z" />
-                  </clipPath>
-                </defs>
-                <ellipse cx="140" cy="250" rx="120" ry="80" fill="url(#pjGlow)" opacity="0.5" />
-                <path d="M50 108 Q34 130 34 162 L34 314 Q34 346 70 346 L210 346 Q246 346 246 314 L246 162 Q246 130 230 108 Z" fill="url(#pjBody)" />
-                <g clipPath="url(#pjClip)" opacity="0.1">
-                  {[0, 1, 2, 3, 4, 5].map(row => [0, 1, 2, 3, 4].map(col => {
-                    const x = 40 + col * 44 + (row % 2 === 1 ? 22 : 0), y = 155 + row * 38, r = 20
-                    const pts = Array.from({ length: 6 }, (_, i) => { const a = (Math.PI / 3) * i - Math.PI / 6; return `${x + r * Math.cos(a)},${y + r * Math.sin(a)}` }).join(' ')
-                    return <polygon key={`${row}-${col}`} points={pts} fill="none" stroke="#FAF6EF" strokeWidth="0.8" />
-                  }))}
-                </g>
-                <path d="M53 110 Q37 132 37 164 L37 265 Q52 252 68 198 L70 110 Z" fill="url(#pjShine)" opacity="0.55" />
-                <ellipse cx="140" cy="178" rx="94" ry="13" fill="#FAE8B4" opacity="0.22" />
-                <ellipse cx="140" cy="176" rx="88" ry="9" fill="#FFFFFF" opacity="0.08" />
-                <path d="M50 108 Q34 130 34 162 L34 314 Q34 346 70 346 L210 346 Q246 346 246 314 L246 162 Q246 130 230 108 Z" fill="none" stroke="rgba(212,168,67,0.25)" strokeWidth="1" />
-                <rect x="86" y="76" width="108" height="38" rx="4" fill="url(#pjBody)" opacity="0.75" stroke="rgba(212,168,67,0.15)" strokeWidth="0.5" />
-                <rect x="91" y="78" width="38" height="34" rx="2" fill="url(#pjShine)" opacity="0.4" />
-                <rect x="72" y="42" width="136" height="40" rx="6" fill="url(#pjLid)" />
-                <rect x="72" y="42" width="136" height="19" rx="6" fill="rgba(255,255,255,0.05)" />
-                <rect x="77" y="78" width="126" height="5" rx="2" fill="rgba(0,0,0,0.35)" />
-                <rect x="76" y="58" width="128" height="1.5" rx="0.75" fill="rgba(212,168,67,0.2)" />
-                <rect x="76" y="68" width="128" height="1" rx="0.5" fill="rgba(212,168,67,0.12)" />
-                <rect x="56" y="198" width="168" height="108" rx="3" fill="rgba(26,20,16,0.28)" stroke="rgba(212,168,67,0.18)" strokeWidth="0.5" />
-                <text x="140" y="237" textAnchor="middle" fontFamily="Georgia, serif" fontSize="12" letterSpacing="7" fill="rgba(212,168,67,0.9)">AURUM</text>
-                <line x1="82" y1="246" x2="198" y2="246" stroke="rgba(212,168,67,0.25)" strokeWidth="0.5" />
-                <text x="140" y="260" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7.5" letterSpacing="4" fill="rgba(212,168,67,0.5)">RAW · HONEY</text>
-                <text x="140" y="278" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6.5" letterSpacing="2.5" fill="rgba(212,168,67,0.32)">SINGLE ORIGIN · WILDFLOWER</text>
-                <text x="140" y="294" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="6" fill="rgba(212,168,67,0.22)">350g · Batch 2026</text>
-                <path d="M150 82 Q150 96 146 106 Q143 113 146 118 Q149 113 151 106 Q153 96 154 82" fill="#D4A843" opacity="0.65" />
-                <ellipse cx="146" cy="120" rx="5" ry="6.5" fill="#D4A843" opacity="0.6" />
-              </svg>
-            </motion.div>
+            {/* Product visual */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={product.id}
+                className="absolute inset-0 flex items-center justify-center"
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+              >
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    priority
+                  />
+                ) : (
+                  <JarSVG />
+                )}
+              </motion.div>
+            </AnimatePresence>
+
           </div>
+        </motion.div>
+      </div>
 
-          {/* Product info */}
-          <div className="text-center" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.5em' }}>Limited Batch · 2026</p>
-            <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 2vw, 24px)', color: 'var(--cream)' }}>Wildflower Raw Honey</h3>
-            <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>350g · Cold-extracted</p>
-          </div>
-        </div>
-      </motion.div>
     </div>
   )
 }
@@ -141,10 +204,7 @@ function Benefit({ icon, title, desc, delay }: { icon: React.ReactNode; title: s
     >
       <div
         className="shrink-0 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-        style={{
-          width: 40, height: 40, borderRadius: '50%',
-          border: '1px solid var(--gold-25)', background: 'var(--gold-05)', color: 'var(--honey-gold)',
-        }}
+        style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid var(--gold-25)', background: 'var(--gold-05)', color: 'var(--honey-gold)' }}
       >
         {icon}
       </div>
@@ -158,7 +218,15 @@ function Benefit({ icon, title, desc, delay }: { icon: React.ReactNode; title: s
 
 /* ── Main section ─────────────────────────────────────────────────── */
 export default function ProductSection() {
+  const [activeProduct, setActiveProduct] = useState(0)
   const [quantity, setQuantity] = useState(1)
+
+  const prev = () => setActiveProduct(a => (a - 1 + PRODUCTS.length) % PRODUCTS.length)
+  const next = () => setActiveProduct(a => (a + 1) % PRODUCTS.length)
+
+  useEffect(() => { setQuantity(1) }, [activeProduct])
+
+  const product = PRODUCTS[activeProduct]
 
   const benefits = [
     {
@@ -202,7 +270,7 @@ export default function ProductSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            The Product
+            The Products
           </motion.span>
           <motion.h2
             className="font-serif"
@@ -212,109 +280,157 @@ export default function ProductSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            One product. <em style={{ color: 'var(--honey-gold)' }}>Perfected.</em>
+            Our <em style={{ color: 'var(--honey-gold)' }}>Collection.</em>
           </motion.h2>
         </div>
 
-        {/* Main grid */}
+        {/* Main grid with flanking arrows */}
+        <div className="flex items-center" style={{ gap: 'clamp(12px, 2vw, 24px)' }}>
+
+          {/* Left arrow */}
+          <button
+            onClick={prev}
+            className="hidden lg:flex shrink-0 items-center justify-center transition-all duration-300 hover:scale-110"
+            style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid var(--gold-25)', color: 'var(--honey-gold)', background: 'none' }}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+
         <div
-          className="grid grid-cols-1 lg:grid-cols-2 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 items-center flex-1"
           style={{ gap: 'clamp(32px, 5vw, 80px)' }}
         >
-        {/* Product card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <ProductCard />
-        </motion.div>
-
-        {/* Info panel */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(24px, 3vw, 40px)' }}>
-          {/* Price + qty */}
+          {/* Product card */}
           <motion.div
-            className="flex items-end justify-between"
-            style={{ borderBottom: '1px solid var(--gold-10)', paddingBottom: 'clamp(20px, 3vw, 32px)' }}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div>
-              <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.4em', marginBottom: 8 }}>
-                Single Jar · 350g
-              </p>
-              <p className="font-serif" style={{ fontSize: 'clamp(36px, 5vw, 56px)', color: 'var(--cream)' }}>€38</p>
-              <p style={{ fontSize: 'clamp(11px, 0.9vw, 13px)', marginTop: 4, color: 'var(--cream-35)' }}>
-                Free shipping · Ships in 2–3 days
-              </p>
-            </div>
-
-            {/* Qty selector */}
-            <div className="flex items-center gap-4" style={{ border: '1px solid var(--gold-20)', padding: '8px 16px' }}>
-              <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="transition-colors hover:text-[#D4A843]" style={{ fontSize: 16, color: 'var(--cream-50)', background: 'none', border: 'none' }}>−</button>
-              <span className="tabular-nums" style={{ fontSize: 14, color: 'var(--cream)', minWidth: 16, textAlign: 'center' }}>{quantity}</span>
-              <button onClick={() => setQuantity(q => Math.min(12, q + 1))} className="transition-colors hover:text-[#D4A843]" style={{ fontSize: 16, color: 'var(--cream-50)', background: 'none', border: 'none' }}>+</button>
-            </div>
-          </motion.div>
-
-          {/* Benefits */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 2vw, 28px)' }}>
-            {benefits.map((b, i) => <Benefit key={b.title} {...b} delay={0.1 + i * 0.1} />)}
-          </div>
-
-          {/* CTA buttons */}
-          <motion.div
-            style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 8 }}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.a
-              href="https://buy.stripe.com/placeholder"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full relative overflow-hidden group"
-              style={{
-                background: 'linear-gradient(135deg, var(--honey-gold) 0%, var(--honey-dark) 100%)',
-                color: 'var(--charcoal)',
-                fontWeight: 500,
-                fontSize: 'clamp(11px, 1vw, 13px)',
-                letterSpacing: '0.25em',
-                textTransform: 'uppercase',
-                padding: 'clamp(14px, 1.5vw, 18px) 24px',
-              }}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              <span className="relative z-10">Add to Cart · €{(38 * quantity).toLocaleString()}</span>
-              <motion.div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, var(--honey-light) 0%, var(--honey-gold) 100%)', opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
-            </motion.a>
-
-            <motion.a
-              href="https://buy.stripe.com/placeholder"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full transition-all duration-300"
-              style={{
-                border: '1px solid var(--gold-30)', color: 'var(--honey-gold)',
-                fontSize: 'clamp(11px, 1vw, 13px)', letterSpacing: '0.25em', textTransform: 'uppercase',
-                padding: 'clamp(14px, 1.5vw, 18px) 24px',
-              }}
-              whileHover={{ borderColor: 'var(--gold-70)', boxShadow: '0 0 24px var(--gold-12)' }}
-            >
-              Buy Now — Secure Checkout
-            </motion.a>
-
-            <p className="text-center" style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-25)' }}>
-              Limited harvest — quantities are not replenished mid-season.
-            </p>
+            <ProductCard
+              product={product}
+              active={activeProduct}
+              total={PRODUCTS.length}
+              onPrev={prev}
+              onNext={next}
+            />
           </motion.div>
+
+          {/* Info panel */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeProduct}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(24px, 3vw, 40px)' }}
+            >
+              {/* Product title */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.5em' }}>{product.badge}</p>
+                <h3 className="font-serif" style={{ fontSize: 'clamp(24px, 3vw, 36px)', color: 'var(--cream)' }}>{product.name}</h3>
+                <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-45)' }}>{product.subtitle}</p>
+              </div>
+
+              {/* Price + qty */}
+              <div
+                className="flex items-end justify-between"
+                style={{ borderBottom: '1px solid var(--gold-10)', paddingBottom: 'clamp(20px, 3vw, 32px)' }}
+              >
+                <div>
+                  <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: 'clamp(8px, 0.85vw, 11px)', letterSpacing: '0.4em', marginBottom: 8 }}>
+                    {product.jarLabel}
+                  </p>
+                  <p className="font-serif" style={{ fontSize: 'clamp(36px, 5vw, 56px)', color: 'var(--cream)' }}>€{product.price}</p>
+                  <p style={{ fontSize: 'clamp(11px, 0.9vw, 13px)', marginTop: 4, color: 'var(--cream-35)' }}>
+                    Free shipping · Ships in 2–3 days
+                  </p>
+                </div>
+
+                {/* Qty selector */}
+                <div className="flex items-center gap-4" style={{ border: '1px solid var(--gold-20)', padding: '8px 16px' }}>
+                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="transition-colors hover:text-[#D4A843]" style={{ fontSize: 16, color: 'var(--cream-50)', background: 'none', border: 'none' }}>−</button>
+                  <span className="tabular-nums" style={{ fontSize: 14, color: 'var(--cream)', minWidth: 16, textAlign: 'center' }}>{quantity}</span>
+                  <button onClick={() => setQuantity(q => Math.min(12, q + 1))} className="transition-colors hover:text-[#D4A843]" style={{ fontSize: 16, color: 'var(--cream-50)', background: 'none', border: 'none' }}>+</button>
+                </div>
+              </div>
+
+              {/* Benefits */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 2vw, 28px)' }}>
+                {benefits.map((b, i) => <Benefit key={b.title} {...b} delay={0.1 + i * 0.1} />)}
+              </div>
+
+              {/* CTA buttons */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, paddingTop: 8 }}>
+                <motion.a
+                  href="https://buy.stripe.com/placeholder"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full relative overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(135deg, var(--honey-gold) 0%, var(--honey-dark) 100%)',
+                    color: 'var(--charcoal)', fontWeight: 500,
+                    fontSize: 'clamp(11px, 1vw, 13px)', letterSpacing: '0.25em', textTransform: 'uppercase',
+                    padding: 'clamp(14px, 1.5vw, 18px) 24px',
+                  }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  <span className="relative z-10">Add to Cart · €{(product.price * quantity).toLocaleString()}</span>
+                  <motion.div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, var(--honey-light) 0%, var(--honey-gold) 100%)', opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }} />
+                </motion.a>
+
+                <motion.a
+                  href="https://buy.stripe.com/placeholder"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full transition-all duration-300"
+                  style={{
+                    border: '1px solid var(--gold-30)', color: 'var(--honey-gold)',
+                    fontSize: 'clamp(11px, 1vw, 13px)', letterSpacing: '0.25em', textTransform: 'uppercase',
+                    padding: 'clamp(14px, 1.5vw, 18px) 24px',
+                  }}
+                  whileHover={{ borderColor: 'var(--gold-70)', boxShadow: '0 0 24px var(--gold-12)' }}
+                >
+                  Buy Now — Secure Checkout
+                </motion.a>
+
+                <p className="text-center" style={{ fontSize: 'clamp(11px, 0.9vw, 12px)', color: 'var(--cream-25)' }}>
+                  Limited harvest — quantities are not replenished mid-season.
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
+
+          {/* Right arrow */}
+          <button
+            onClick={next}
+            className="hidden lg:flex shrink-0 items-center justify-center transition-all duration-300 hover:scale-110"
+            style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid var(--gold-25)', color: 'var(--honey-gold)', background: 'none' }}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+
         </div>
+
+        {/* Dot indicators — centered below the full layout */}
+        <div className="flex items-center justify-center gap-2" style={{ marginTop: 40 }}>
+          {PRODUCTS.map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{ width: i === activeProduct ? 24 : 6, background: i === activeProduct ? 'var(--honey-gold)' : 'var(--gold-25)' }}
+              transition={{ duration: 0.3 }}
+              style={{ height: 2, borderRadius: 1 }}
+            />
+          ))}
+        </div>
+
       </div>
     </section>
   )
