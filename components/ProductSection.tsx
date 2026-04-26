@@ -6,8 +6,8 @@ import Image from 'next/image'
 import type { ProductDict } from '@/types/dict'
 
 const PRODUCTS_STATIC = [
-  { id: 'thy-wildflower', price: 38, image: '/images/honey.jpg' as string | null },
-  { id: 'creamy-thy-canola', price: 38, image: null as string | null },
+  { id: 'thy-wildflower', price: 38, image: '/images/350g.jpg' as string | null },
+  { id: 'creamy-thy-canola', price: 42, image: '/images/450g.jpg' as string | null },
 ]
 
 type Product = {
@@ -209,8 +209,8 @@ export default function ProductSection({ dict }: { dict: ProductDict }) {
     ...p,
     name: dict.products[i]?.name ?? p.id,
     badge: dict.badge,
-    subtitle: dict.subtitle,
-    jarLabel: dict.jarLabel,
+    subtitle: dict.products[i]?.subtitle ?? '',
+    jarLabel: dict.products[i]?.jarLabel ?? '',
   }))
 
   const prev = () => setActiveProduct(a => (a - 1 + PRODUCTS.length) % PRODUCTS.length)

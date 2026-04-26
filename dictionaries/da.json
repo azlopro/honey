@@ -47,15 +47,13 @@
     "sectionHeadlineStart": "Vores",
     "sectionHeadlineEm": "Kollektion.",
     "badge": "Begrænset Batch · 2026",
-    "subtitle": "350g · Koldt udvundet",
-    "jarLabel": "Enkelt Glas · 350g",
     "freeShipping": "Gratis fragt · Leveres inden 2–3 dage",
     "addToCart": "Læg i kurv",
     "buyNow": "Køb Nu — Sikker betaling",
     "limitedNote": "Begrænset høst. Mængder genopfyldes ikke midt i sæsonen.",
     "products": [
-      { "id": "thy-wildflower", "name": "Thy Vildblomst Honning" },
-      { "id": "creamy-thy-canola", "name": "Cremet Thy Raps Honning" }
+      { "id": "thy-wildflower", "name": "Thy Vildblomst Honning", "subtitle": "350g · Koldt udvundet", "jarLabel": "Tube · 350g" },
+      { "id": "creamy-thy-canola", "name": "Cremet Thy Raps Honning", "subtitle": "450g · Koldt udvundet", "jarLabel": "Enkelt Glas · 450g" }
     ],
     "benefits": [
       {
@@ -116,7 +114,7 @@
     "headlineEm": "forskellen",
     "headline2": "inden den er væk.",
     "body": "Hver høst er begrænset. Når 2026-batchen er udsolgt, ankommer den næste ikke før den følgende sæson. Reserver din nu.",
-    "primaryCta": "Bestil Nu — €38",
+    "primaryCta": "Bestil Nu — fra €38",
     "secondaryCta": "Læs Mere",
     "trust": {
       "secure": "Sikker betaling",

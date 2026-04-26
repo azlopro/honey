@@ -47,15 +47,13 @@
     "sectionHeadlineStart": "Unsere",
     "sectionHeadlineEm": "Kollektion.",
     "badge": "Begrenzte Charge · 2026",
-    "subtitle": "350g · Kalt extrahiert",
-    "jarLabel": "Einzelglas · 350g",
     "freeShipping": "Kostenloser Versand · Lieferung in 2–3 Tagen",
     "addToCart": "In den Warenkorb",
     "buyNow": "Jetzt Kaufen — Sicher Bezahlen",
     "limitedNote": "Begrenzte Ernte: Mengen werden nicht mitten in der Saison aufgefüllt.",
     "products": [
-      { "id": "thy-wildflower", "name": "Thy Wildblumen-Honig" },
-      { "id": "creamy-thy-canola", "name": "Cremiger Thy Raps-Honig" }
+      { "id": "thy-wildflower", "name": "Thy Wildblumen-Honig", "subtitle": "350g · Kalt extrahiert", "jarLabel": "Tube · 350g" },
+      { "id": "creamy-thy-canola", "name": "Cremiger Thy Raps-Honig", "subtitle": "450g · Kalt extrahiert", "jarLabel": "Einzelglas · 450g" }
     ],
     "benefits": [
       {
@@ -116,7 +114,7 @@
     "headlineEm": "Unterschied",
     "headline2": "bevor er weg ist.",
     "body": "Jede Ernte ist begrenzt. Wenn die 2026er Charge ausverkauft ist, kommt die nächste erst in der folgenden Saison. Reservieren Sie jetzt Ihre.",
-    "primaryCta": "Jetzt Bestellen — €38",
+    "primaryCta": "Jetzt Bestellen — ab €38",
     "secondaryCta": "Mehr Erfahren",
     "trust": {
       "secure": "Sichere Zahlung",

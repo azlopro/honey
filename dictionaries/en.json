@@ -20,7 +20,7 @@
       {
         "number": "01 / Origin",
         "title": "Born on the wild coast.",
-        "body": "Our single-origin honey is harvested from wild coastal landscapes along the Danish shoreline, untouched by pesticides and far from industry. Every jar carries the living character of the North Sea coast.",
+        "body": "Our single-origin honey is harvested from wild coastal landscapes along the Danish shoreline, untouched by pesticides and far from industry. Every bottle carries the living character of the North Sea coast.",
         "photoLabel": "Coastal wetlands, Thy"
       },
       {
@@ -47,15 +47,13 @@
     "sectionHeadlineStart": "Our",
     "sectionHeadlineEm": "Collection.",
     "badge": "Limited Batch · 2026",
-    "subtitle": "350g · Cold-extracted",
-    "jarLabel": "Single Jar · 350g",
     "freeShipping": "Free shipping · Ships in 2–3 days",
     "addToCart": "Add to Cart",
     "buyNow": "Buy Now — Secure Checkout",
     "limitedNote": "Limited harvest: quantities are not replenished mid-season.",
     "products": [
-      { "id": "thy-wildflower", "name": "Thy Wildflower Honey" },
-      { "id": "creamy-thy-canola", "name": "Creamy Thy Canola Honey" }
+      { "id": "thy-wildflower", "name": "Thy Wildflower Honey", "subtitle": "350g · Cold-extracted", "jarLabel": "Squeeze Tube · 350g" },
+      { "id": "creamy-thy-canola", "name": "Creamy Thy Canola Honey", "subtitle": "450g · Cold-extracted", "jarLabel": "Single Jar · 450g" }
     ],
     "benefits": [
       {
@@ -116,7 +114,7 @@
     "headlineEm": "difference",
     "headline2": "before it's gone.",
     "body": "Each harvest is finite. When the 2026 batch sells out, the next won't arrive until the following season. Reserve yours now.",
-    "primaryCta": "Order Now — €38",
+    "primaryCta": "Order Now — from €38",
     "secondaryCta": "Learn More",
     "trust": {
       "secure": "Secure payment",
