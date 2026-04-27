@@ -158,6 +158,41 @@ export function NorthernLightsVisual()   { return <PhotoVisual src="/images/nort
 export function SealVisual()             { return <PhotoVisual src="/images/Smiling-seal.jpg"                                       alt="Harbour seal on the rocks, Danish coast"      label="Wild coastal life"       position="center 30%" /> }
 export function SunsetMeadowVisual({ label = 'Coastal wetlands, Thy' }: { label?: string }) { return <PhotoVisual src="/images/very-nice-sunset-in-the-meadows.jpg" alt="Golden sunset over coastal wetlands, Thy" label={label} position="center 50%" /> }
 
+/* ── Video visual ─────────────────────────────────────────────────── */
+function VideoVisual({ src, label }: { src: string; label: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? el.play().catch(() => {}) : el.pause() },
+      { threshold: 0.25 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div className="relative rounded overflow-hidden" style={{ aspectRatio: '4/3', border: '1px solid var(--gold-08)' }}>
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 w-full h-full"
+        style={{ objectFit: 'cover' }}
+      />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(6,4,2,0.7) 0%, transparent 45%)' }} />
+      <div className="absolute bottom-0 inset-x-0 pb-4 text-center">
+        <p className="uppercase" style={{ color: 'var(--gold-40)', fontSize: '10px', letterSpacing: '0.25em' }}>{label}</p>
+      </div>
+    </div>
+  )
+}
+
 /* ── Hex cell visual ──────────────────────────────────────────────── */
 function HoneycombVisual({ label = 'Hexagonal perfection' }: { label?: string }) {
   const hexes = [
@@ -398,8 +433,8 @@ export default function ScrollStory({ dict }: { dict: StoryDict }) {
     side: sides[i],
     visual:
       i === 0 ? <SunsetMeadowVisual label={ch.photoLabel} /> :
-      i === 1 ? <HoneycombVisual label={ch.photoLabel} /> :
-      <DripVisual label={ch.photoLabel} />,
+      i === 1 ? <VideoVisual src="/videos/bee-hex.mp4" label={ch.photoLabel} /> :
+      <VideoVisual src="/videos/honey-flow.mp4" label={ch.photoLabel} />,
   }))
 
   return (

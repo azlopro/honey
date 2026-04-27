@@ -72,15 +72,17 @@ function HeroVideo() {
 /* ── Honey Bottle Image ───────────────────────────────────────────── */
 function HoneyJar() {
   return (
-    <Image
-      src="/images/hero-honey.png"
-      alt="HONEY 56° bottle"
-      fill
-      sizes="(max-width: 768px) 34vw, 360px"
-      quality={100}
-      style={{ objectFit: 'contain', objectPosition: 'center', filter: 'drop-shadow(0 26px 52px rgba(140,85,8,0.55))' }}
-      priority
-    />
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <Image
+        src="/images/hero-honey.png"
+        alt="HONEY 56° bottle"
+        fill
+        sizes="(max-width: 768px) 34vw, 360px"
+        quality={100}
+        style={{ objectFit: 'contain', objectPosition: 'center', filter: 'drop-shadow(0 26px 52px rgba(140,85,8,0.55))' }}
+        priority
+      />
+    </div>
   )
 }
 
@@ -219,7 +221,7 @@ export default function Hero({ dict }: { dict: HeroDict }) {
           <div style={{ width: '100%', height: '100%', animation: 'float 7s ease-in-out infinite' }}>
             <div
               ref={jarRef}
-              style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d', perspective: 800 }}
+              style={{ position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d', perspective: 800 }}
             >
               <HoneyJar />
             </div>
