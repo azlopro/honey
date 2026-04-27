@@ -79,33 +79,38 @@
     "sectionLabel": "Hvad de siger",
     "headline1": "Smagt af dem der",
     "headline2": "kender forskel.",
-    "ratingLine": "4,98 · 312 anmeldelser",
+    "ratingLine": "5,0 · 6 anmeldelser",
     "verifiedPurchase": "Verificeret Køb",
     "reviews": [
       {
-        "quote": "Den mest ekstraordinære honning jeg nogensinde har smagt. Den blomstrede kompleksitet er ulig noget fra supermarkedshylden. Dette er noget særligt.",
-        "author": "Isabelle M.",
-        "location": "Paris, Frankrig"
-      },
-      {
-        "quote": "Jeg køber dette til min restaurants ostebræt. Gæster spørger konsekvent om det. Terroiret skinner igennem, man kan smage engen.",
-        "author": "Marco F.",
-        "location": "London, UK"
-      },
-      {
-        "quote": "Vi har givet HONEY 56° som julegave tre år i træk. Præsentationen alene retfærdiggør prisen, men smagen er det, der får folk til at vende tilbage.",
-        "author": "Charlotte R.",
-        "location": "Zürich, Schweiz"
-      },
-      {
-        "quote": "Som certificeret ernæringsekspert anbefaler jeg dette til alle mine klienter. Rå, ufiltreret, og enzymprofilen er exceptionel. Sådan bør honning være.",
-        "author": "Dr. Priya N.",
-        "location": "Amsterdam, NL"
-      },
-      {
-        "quote": "Silkeblød, varm, med noter af lavendel og noget næsten karamelleagtigt. Smurt på surdejsbrød om morgenen er dette mit yndlingsritual.",
-        "author": "Thomas B.",
+        "quote": "Den har ikke den voksede eftersmag, som man kender fra mange honninger. Ren, blød, føles naturlig på tungen. Smelter næsten i munden. Frisk og aldrig for sød.",
+        "author": "Marie K.",
         "location": "Berlin, Tyskland"
+      },
+      {
+        "quote": "Fik den i gave og prøvede den med saltede kiks, da jeg var sulten. Sød og salt sammen var så godt, at det halve glas pludselig var spist.",
+        "author": "Jonas R.",
+        "location": "Köln, Tyskland"
+      },
+      {
+        "quote": "Lækker blød og fløjlsagtig. Sød, men ikke for tung. God på brød eller bare lige fra skeen. Man kan smage, at den er lavet med omhu og uden tilsætning.",
+        "author": "Lukas H.",
+        "location": "Hamborg, Tyskland"
+      },
+      {
+        "quote": "Den cremede konsistens føles næsten som en lille godbid. Blød og fyldig, som et stykke naturligt slik. Smagen er stadig helt ren.",
+        "author": "Felix W.",
+        "location": "München, Tyskland"
+      },
+      {
+        "quote": "Tubeflasken er så praktisk, og sødmen rammer lige rigtigt. God i dressinger, i te, over yoghurt. Den hører fast til i vores køkken nu.",
+        "author": "Sophie B.",
+        "location": "Frankfurt, Tyskland"
+      },
+      {
+        "quote": "En let vokset tone og en fyldig smag. Skøn rørt i te. Den kan også bruges uden for køkkenet, i ansigtsmasker eller blandet med groft salt som naturligt peeling.",
+        "author": "Anna T.",
+        "location": "Düsseldorf, Tyskland"
       }
     ]
   },

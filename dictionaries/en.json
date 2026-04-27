@@ -79,33 +79,38 @@
     "sectionLabel": "What they say",
     "headline1": "Tasted by those who",
     "headline2": "know the difference.",
-    "ratingLine": "4.98 · 312 reviews",
+    "ratingLine": "5.0 · 6 reviews",
     "verifiedPurchase": "Verified Purchase",
     "reviews": [
       {
-        "quote": "The most extraordinary honey I have ever tasted. The floral complexity is unlike anything from a supermarket shelf. Nothing else comes close.",
-        "author": "Isabelle M.",
-        "location": "Paris, France"
-      },
-      {
-        "quote": "I buy this for my restaurant's cheese board. Guests consistently ask about it. The terroir comes through — you can taste the meadow.",
-        "author": "Marco F.",
-        "location": "London, UK"
-      },
-      {
-        "quote": "We've been gifting HONEY 56° at Christmas for three years running. The presentation alone justifies the price, but the taste is what makes customers return.",
-        "author": "Charlotte R.",
-        "location": "Zürich, Switzerland"
-      },
-      {
-        "quote": "As a nutritional therapist, I recommend this to all my clients. Raw, unfiltered, and the enzyme profile is exceptional. This is honey the way it should be.",
-        "author": "Dr. Priya N.",
-        "location": "Amsterdam, NL"
-      },
-      {
-        "quote": "Silky, warm, with notes of lavender and something almost caramel. Spread on sourdough in the morning this is my favourite ritual.",
-        "author": "Thomas B.",
+        "quote": "Doesn't have that waxy aftertaste some honeys leave. Clean, smooth, feels natural on the tongue. Almost melts in your mouth. Fresh, never too sweet.",
+        "author": "Marie K.",
         "location": "Berlin, Germany"
+      },
+      {
+        "quote": "Got it as a gift. Tried it on salted crackers when I was hungry, didn't expect much. Sweet and salty together was so good that half the jar was gone before I noticed.",
+        "author": "Jonas R.",
+        "location": "Cologne, Germany"
+      },
+      {
+        "quote": "Smooth and velvety. Sweet, but not in a heavy way. Good on toast, or just off the spoon. You can taste that it's made with care, no additives.",
+        "author": "Lukas H.",
+        "location": "Hamburg, Germany"
+      },
+      {
+        "quote": "The creamy texture almost feels like a sweet treat. Soft and rich, like a piece of natural candy. Pure in taste, though.",
+        "author": "Felix W.",
+        "location": "Munich, Germany"
+      },
+      {
+        "quote": "The squeeze tube is so handy, and the sweetness is balanced just right. Good in salad dressings, in tea, over yogurt. Lives in our kitchen now.",
+        "author": "Sophie B.",
+        "location": "Frankfurt, Germany"
+      },
+      {
+        "quote": "A light waxy note and a rich, full flavour. Lovely stirred into tea. Works outside the kitchen too: face masks, or mixed with coarse salt as a homemade scrub.",
+        "author": "Anna T.",
+        "location": "Düsseldorf, Germany"
       }
     ]
   },

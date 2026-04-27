@@ -79,33 +79,38 @@
     "sectionLabel": "Was sie sagen",
     "headline1": "Probiert von denen, die",
     "headline2": "den Unterschied kennen.",
-    "ratingLine": "4,98 · 312 Bewertungen",
+    "ratingLine": "5,0 · 6 Bewertungen",
     "verifiedPurchase": "Verifizierter Kauf",
     "reviews": [
       {
-        "quote": "Der außergewöhnlichste Honig, den ich je gekostet habe. Die blumige Komplexität ist unvergleichlich mit allem aus dem Supermarktregal — das ist wirklich etwas Besonderes.",
-        "author": "Isabelle M.",
-        "location": "Paris, Frankreich"
-      },
-      {
-        "quote": "Ich kaufe das für das Käsebrett meines Restaurants. Gäste fragen ständig danach. Das Terroir kommt durch — man kann die Wiese schmecken.",
-        "author": "Marco F.",
-        "location": "London, UK"
-      },
-      {
-        "quote": "Wir verschenken HONEY 56° seit drei Jahren zu Weihnachten. Allein die Präsentation rechtfertigt den Preis — aber der Geschmack ist es, der Kunden zurückbringt.",
-        "author": "Charlotte R.",
-        "location": "Zürich, Schweiz"
-      },
-      {
-        "quote": "Als integrative Ernährungsberaterin empfehle ich das allen meinen Klienten. Roh, ungefiltert, und das Enzymprofil ist bemerkenswert. So sollte Honig sein.",
-        "author": "Dr. Priya N.",
-        "location": "Amsterdam, NL"
-      },
-      {
-        "quote": "Seidig, warm, mit Noten von Lavendel und etwas fast Karamellartigem. Auf Sauerteigbrot morgens ist das mein liebstes Ritual.",
-        "author": "Thomas B.",
+        "quote": "Hat nicht diesen wachsigen Beigeschmack, den manche Honige haben. Klar, weich, fühlt sich natürlich auf der Zunge an. Schmilzt fast im Mund. Frisch und nie zu süß.",
+        "author": "Marie K.",
         "location": "Berlin, Deutschland"
+      },
+      {
+        "quote": "Hatte ihn geschenkt bekommen und mit gesalzenen Crackern probiert, als ich Hunger hatte. Süß und salzig zusammen war so gut, dass plötzlich das halbe Glas leer war.",
+        "author": "Jonas R.",
+        "location": "Köln, Deutschland"
+      },
+      {
+        "quote": "Schön weich und samtig. Süß, aber nicht zu schwer. Gut auf Brot oder einfach vom Löffel. Man schmeckt, dass mit Sorgfalt gemacht wurde, ohne Zusätze.",
+        "author": "Lukas H.",
+        "location": "Hamburg, Deutschland"
+      },
+      {
+        "quote": "Die cremige Konsistenz fühlt sich fast wie eine Süßigkeit an. Weich und voll, wie ein Stück natürliches Konfekt. Im Geschmack aber pur.",
+        "author": "Felix W.",
+        "location": "München, Deutschland"
+      },
+      {
+        "quote": "Die Quetschtube ist so praktisch, und die Süße passt einfach. Gut im Dressing, im Tee, über Joghurt. Steht jetzt fest bei uns in der Küche.",
+        "author": "Sophie B.",
+        "location": "Frankfurt, Deutschland"
+      },
+      {
+        "quote": "Eine leichte wachsige Note und ein voller Geschmack. Schön im Tee. Funktioniert auch außerhalb der Küche, in Gesichtsmasken oder mit grobem Salz als kleines Peeling.",
+        "author": "Anna T.",
+        "location": "Düsseldorf, Deutschland"
       }
     ]
   },
